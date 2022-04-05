@@ -13,7 +13,7 @@ public class SingletonConnection {
     public static final String JDBC_USER = "root";
     public static final String JDBC_PASSWORD = "Giangpro123";
 
-    private static Connection getConnection(){
+    public static Connection getConnection(){
      Connection connection = null;
      try {
          Class.forName("com.mysql.jdbc.Driver");
