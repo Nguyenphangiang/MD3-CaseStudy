@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class SingletonConnection {
+    private SingletonConnection() {
+    }
 
     public static final String JDBC_URL = "jdbc:mysql://localhost:3306/trua_nay_an_gi";
     public static final String JDBC_USER = "root";
