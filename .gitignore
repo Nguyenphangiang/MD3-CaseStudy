@@ -104,4 +104,4 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-/src/java/DAO/SingletonConnection.java
+src/main/java/config/SingletonConnection.java
