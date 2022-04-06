@@ -28,11 +28,9 @@ public class DishDAO implements IDishDAO {
         Connection connection = SingletonConnection.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price,\n" +
-                        "       mkm.id as id_discount, mkm.khuyen_mai_code as discountCode, mkm.gia_khuyen_mai as discountPrice,\n" +
-                        "       nh.id as id_restaurant, nh.name as restaurant, nh.address as address, nh.phone,nh.open_time,nh.close_time \n" +
+                        "nh.id as id_restaurant, nh.name as restaurant, nh.address as address, nh.phone,nh.open_time,nh.close_time \n" +
                         "from mon_an\n" +
-                        "    join ma_khuyen_mai mkm on mon_an.khuyen_mai_id = mkm.id\n" +
-                        "    join nha_hang nh on nh.id = mon_an.nha_hang_id\n")
+                        "join nha_hang nh on nh.id = mon_an.nha_hang_id\n")
             ){
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -41,11 +39,6 @@ public class DishDAO implements IDishDAO {
                 String image = rs.getString("image");
                 String note = rs.getString("note");
                 int price = rs.getInt("price");
-
-                int id_discount = rs.getInt("id_discount");
-                String discountCode = rs.getString("discountCode");
-                int discountPrice = rs.getInt("discountPrice");
-                DiscountCode dc = new DiscountCode(id_discount, discountCode, discountPrice);
 
                 List<Tag> tags = tagDAO.findAllByDishId(id);
 
@@ -56,7 +49,7 @@ public class DishDAO implements IDishDAO {
                 Time openTime = rs.getTime("open_time");
                 Time closeTime = rs.getTime("close_time");
                 Restaurant restaurant = new Restaurant(id_restaurant, restaurantName, restaurantAddress, restaurantPhone, openTime, closeTime);
-                Dish dish = new Dish(id, name, image, note, price, dc, tags, restaurant);
+                Dish dish = new Dish(id, name, image, note, price, tags, restaurant);
                 dishes.add(dish);
             }
             } catch (SQLException e) {

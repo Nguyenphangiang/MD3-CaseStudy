@@ -20,7 +20,6 @@
         <th>Image</th>
         <th>Note</th>
         <th>Price</th>
-<%--        <th>Discount Price</th>--%>
         <th>Restaurant Name</th>
         <th>Danh mục Tag</th>
 
@@ -32,10 +31,10 @@
             <td>${d.getDishImage()}</td>
             <td>${d.getDishNote()}</td>
             <td>${d.getDishPrice()}</td>
-            <td>${d.restaurant.getRestaurantName()}</td>
+            <td>${d.getRestaurant().getRestaurantName()}</td>
             <td>
-                <c:forEach items="${d.tags}" var="tag">
-                    <span>${tag.name}</span> &nbsp;
+                <c:forEach items="${d.getTag()}" var="tag">
+                    <span>${tag.getTagName()}</span> &nbsp;
                 </c:forEach>
             </td>
         </tr>
