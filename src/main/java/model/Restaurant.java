@@ -8,10 +8,10 @@ public class Restaurant {
     private String restaurantName;
     private String restaurantAddress;
     private String restaurantPhone;
-    private LocalTime openTime;
-    private LocalTime closeTime;
+    private Time openTime;
+    private Time closeTime;
 
-    public Restaurant(int id, String restaurantName, String restaurantAddress, String restaurantPhone, LocalTime openTime, LocalTime closeTime) {
+    public Restaurant(int id, String restaurantName, String restaurantAddress, String restaurantPhone, Time openTime, Time closeTime) {
         this.id = id;
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
@@ -20,7 +20,7 @@ public class Restaurant {
         this.closeTime = closeTime;
     }
 
-    public Restaurant(String restaurantName, String restaurantAddress, String restaurantPhone, LocalTime openTime, LocalTime closeTime) {
+    public Restaurant(String restaurantName, String restaurantAddress, String restaurantPhone, Time openTime, Time closeTime) {
         this.restaurantName = restaurantName;
         this.restaurantAddress = restaurantAddress;
         this.restaurantPhone = restaurantPhone;
@@ -63,19 +63,19 @@ public class Restaurant {
         this.restaurantPhone = restaurantPhone;
     }
 
-    public LocalTime getOpenTime() {
+    public Time getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(LocalTime openTime) {
+    public void setOpenTime(Time openTime) {
         this.openTime = openTime;
     }
 
-    public LocalTime getCloseTime() {
+    public Time getCloseTime() {
         return closeTime;
     }
 
-    public void setCloseTime(LocalTime closeTime) {
+    public void setCloseTime(Time closeTime) {
         this.closeTime = closeTime;
     }
 
