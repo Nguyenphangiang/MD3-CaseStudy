@@ -6,7 +6,24 @@ public class BillDetail {
     private int id;
     private User user;
     private List<Dish> dish;
+    private DiscountCode discountCode;
     private int quantity;
+
+    public DiscountCode getDiscountCode() {
+        return discountCode;
+    }
+
+    public void setDiscountCode(DiscountCode discountCode) {
+        this.discountCode = discountCode;
+    }
+
+    public BillDetail(int id, User user, List<Dish> dish, DiscountCode discountCode, int quantity) {
+        this.id = id;
+        this.user = user;
+        this.dish = dish;
+        this.discountCode = discountCode;
+        this.quantity = quantity;
+    }
 
     public BillDetail(int id, User user, List<Dish> dish, int quantity) {
         this.id = id;
