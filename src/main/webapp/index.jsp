@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: admin
@@ -11,6 +12,31 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <div align="center">
+    <table border="1" cellpadding="5">
+      <caption><h2>List of Deal</h2></caption>
+      <tr>
+        <th>ten deal</th>
+        <th>hinh anh</th>
+        <th>mo ta</th>
+        <th>gia</th>
+        <th>ten nha hang</th>
+        <th></th>
+      </tr>
+      <c:forEach var="s" items="${deal}">
+        <tr>
+          <td><c:out value="${s.dealName}"/></td>
+          <td><c:out value="${s.getDealImage()}"/></td>
+          <td><c:out value="${s.getDescription()}"/></td>
+          <td><c:out value="${s.getDealPrice()}"/></td>
+          <td><c:out value="${s.getRestaurant().getRestaurantName()}"/></td>
+          <td>
+            <a href="/users?action=edit&id=${s.id}">Edit</a>
+            <a href="/restaurant?action=delete&id=${s.id}">Delete</a>
+          </td>
+        </tr>
+      </c:forEach>
+    </table>
+  </div>
   </body>
 </html>
