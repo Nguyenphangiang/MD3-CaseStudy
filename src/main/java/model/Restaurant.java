@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Time;
 import java.time.LocalTime;
 
 public class Restaurant {

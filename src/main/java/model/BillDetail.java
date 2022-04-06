@@ -1,19 +1,21 @@
 package model;
 
+import java.util.List;
+
 public class BillDetail {
     private int id;
     private User user;
-    private Dish dish;
+    private List<Dish> dish;
     private int quantity;
 
-    public BillDetail(int id, User user, Dish dish, int quantity) {
+    public BillDetail(int id, User user, List<Dish> dish, int quantity) {
         this.id = id;
         this.user = user;
         this.dish = dish;
         this.quantity = quantity;
     }
 
-    public BillDetail(User user, Dish dish, int quantity) {
+    public BillDetail(User user, List<Dish> dish, int quantity) {
         this.user = user;
         this.dish = dish;
         this.quantity = quantity;
@@ -38,11 +40,11 @@ public class BillDetail {
         this.user = user;
     }
 
-    public Dish getDish() {
+    public List<Dish> getDish() {
         return dish;
     }
 
-    public void setDish(Dish dish) {
+    public void setDish(List<Dish> dish) {
         this.dish = dish;
     }
 
