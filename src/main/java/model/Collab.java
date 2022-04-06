@@ -5,21 +5,22 @@ public class Collab {
     private String collabName;
     private String collabEmail;
     private String collabPassword;
-    private Restaurant restaurant;
+//    private String restaurant;
 
-    public Collab(int id, String collabName, String collabEmail, String collabPassword, Restaurant restaurant) {
+    public Collab(int id, String collabName, String collabEmail, String collabPassword, String restaurant) {
         this.id = id;
         this.collabName = collabName;
         this.collabEmail = collabEmail;
         this.collabPassword = collabPassword;
-        this.restaurant = restaurant;
+//        this.restaurant =restaurant;
+
     }
 
     public Collab(String collabName, String collabEmail, String collabPassword, Restaurant restaurant) {
         this.collabName = collabName;
         this.collabEmail = collabEmail;
         this.collabPassword = collabPassword;
-        this.restaurant = restaurant;
+//        this.restaurant = restaurant;
     }
 
     public Collab() {
@@ -57,13 +58,13 @@ public class Collab {
         this.collabPassword = collabPassword;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
-    }
+//    public Restaurant getRestaurant() {
+//        return restaurant;
+//    }
 
-    public void setRestaurant(Restaurant restaurant) {
-        this.restaurant = restaurant;
-    }
+//    public void setRestaurant(Restaurant restaurant) {
+//        this.restaurant = restaurant;
+//    }
 
     @Override
     public String toString() {
@@ -72,7 +73,7 @@ public class Collab {
                 ", collabName='" + collabName + '\'' +
                 ", collabEmail='" + collabEmail + '\'' +
                 ", collabPassword='" + collabPassword + '\'' +
-                ", restaurant=" + restaurant +
+//                ", restaurant=" + restaurant +
                 '}';
     }
 }

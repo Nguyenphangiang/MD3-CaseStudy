@@ -12,11 +12,12 @@
 </head>
 <body>
 <h1>Login Form</h1>
-<form action="ResRestaurantServlet" method="post">
+<form method="post">
     <p>Tai khoan</p>
-    <input type="text" name="account" placeholder="account"/><br>
+    <input type="text" name="username" placeholder="username"/><br>
     <p>Mat khau</p>
-    <input type="text" name="password" placeholder="password"/><br>
+    <input type="password" name="password" placeholder="password"/><br>
+<%--    <button type="submit" onclick="location.href='login/welcome.jsp'">Login</button>--%>
     <input type="submit" value="login"/>
 </form>
 </body>

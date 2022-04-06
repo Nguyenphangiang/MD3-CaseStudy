@@ -14,4 +14,5 @@ public interface IDAO<T> {
    boolean save (T t);
 
    boolean delete(int id);
+
 }
