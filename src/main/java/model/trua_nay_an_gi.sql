@@ -28,7 +28,9 @@ create table ma_khuyen_mai(
 );
 create table the(
                     id int auto_increment primary key ,
-                    tagName nvarchar(50)
+                    tagName nvarchar(50),
+                    luot_them int,
+                    luot_xem int
 );
 create table mon_an(
                        id int primary key  auto_increment,
@@ -37,10 +39,8 @@ create table mon_an(
                        note nvarchar(255),
                        price int,
                        khuyen_mai_id int,
-                       tag_id int,
                        nha_hang_id int,
                        foreign key (nha_hang_id) references  nha_hang(id),
-                       foreign key (tag_id) references  the(id),
                        foreign key (khuyen_mai_id) references ma_khuyen_mai(id)
 );
 create table deal(
@@ -61,16 +61,22 @@ create table nguoi_dung(
 create table hoa_don(
                         id int primary key auto_increment,
                         hoa_don_code nvarchar(255),
-                        ngay_thang datetime,
-                        nguoi_dung_id int,
-                        foreign key (nguoi_dung_id) references nguoi_dung(id)
+                        ngay_thang datetime
 );
 create table chi_tiet_hoa_don(
     id int primary key auto_increment,
     nguoi_dung_id int,
     mon_an_id int,
+    hoa_don_id int,
     so_luong int,
     foreign key (mon_an_id) references mon_an(id),
     foreign key (nguoi_dung_id)references nguoi_dung(id)
+);
+create table mon_an_tag(
+    the_id int,
+    mon_an_id int,
+    PRIMARY KEY (the_id,mon_an_id),
+    foreign key (the_id) references the(id),
+    foreign key (mon_an_id)references mon_an(id)
 );
 
