@@ -12,3 +12,5 @@ insert into hoa_don( hoa_don_code, ngay_thang, nguoi_dung_id)
 values ('hd1','2022-5-4',1);
 insert into chi_tiet_hoa_don( nguoi_dung_id, mon_an_id, so_luong)
 values (1,1,4);
+
+select *from admin where account='ducdaudshp@gmail' and password='123456@Abc';
