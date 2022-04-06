@@ -1,21 +1,26 @@
 package DAO.Dish;
 
+import DAO.Tag.ITagDAO;
+import DAO.Tag.TagDAO;
 import config.SingletonConnection;
 import model.DiscountCode;
 import model.Dish;
 import model.Restaurant;
 import model.Tag;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import static config.SingletonConnection.getConnection;
 
 public class DishDAO implements IDishDAO {
+    ITagDAO tagDAO = new TagDAO();
+
+    @Override
+    public void save(Dish dish, int[] categories) {
+
+    }
 
     @Override
     public List<Dish> findAll() {
@@ -23,13 +28,11 @@ public class DishDAO implements IDishDAO {
         Connection connection = SingletonConnection.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price,\n" +
-                        "       mkm.id as id_discount, mkm.gia_khuyen_mai as discountPrice,\n" +
-                        "       t.id as id_tag, t.tagName as tagName,\n" +
-                        "       nh.id as id_restaurant, nh.name as restaurant, nh.phone as restaurantPhone, nh.address\n" +
+                        "       mkm.id as id_discount, mkm.khuyen_mai_code as discountCode, mkm.gia_khuyen_mai as discountPrice,\n" +
+                        "       nh.id as id_restaurant, nh.name as restaurant, nh.address as address, nh.phone as restaurantPhone\n" +
                         "from mon_an\n" +
                         "    join ma_khuyen_mai mkm on mon_an.khuyen_mai_id = mkm.id\n" +
-                        "    join the t on mon_an.tag_id = t.id\n" +
-                        "    join nha_hang nh on nh.id = mon_an.nha_hang_id")
+                        "    join nha_hang nh on nh.id = mon_an.nha_hang_id\n")
             ){
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -38,18 +41,22 @@ public class DishDAO implements IDishDAO {
                 String image = rs.getString("image");
                 String note = rs.getString("note");
                 int price = rs.getInt("price");
+
                 int id_discount = rs.getInt("id_discount");
+                String discountCode = rs.getString("discountCode");
                 int discountPrice = rs.getInt("discountPrice");
-                DiscountCode discountCode = new DiscountCode(id_discount, discountPrice);
-                int id_tag = rs.getInt("id_tag");
-                String tagName = rs.getString("tagName");
-                Tag tag = new Tag(id_tag, tagName);
+                DiscountCode dc = new DiscountCode(id_discount, discountCode, discountPrice);
+
+                List<Tag> tags = tagDAO.findAllByDishId(id);
+
                 int id_restaurant = rs.getInt("id_restaurant");
                 String restaurantName = rs.getString("restaurant");
-                String restaurantPhone = rs.getString("phone");
                 String restaurantAddress = rs.getString("address");
-                Restaurant restaurant = new Restaurant(id_restaurant, restaurantName, restaurantPhone, restaurantAddress);
-                Dish dish = new Dish(id, name, image, note, price, discountCode, tag, restaurant);
+                String restaurantPhone = rs.getString("phone");
+                Time onpenTime = rs.getTime("onpenTime");
+                Time closeTime = rs.getTime("closeTime");
+                Restaurant restaurant = new Restaurant(id_restaurant, restaurantName, restaurantAddress, restaurantPhone, onpenTime, closeTime);
+                Dish dish = new Dish(id, name, image, note, price, dc, tags, restaurant);
                 dishes.add(dish);
             }
             } catch (SQLException e) {

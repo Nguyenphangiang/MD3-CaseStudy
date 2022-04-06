@@ -6,12 +6,14 @@ import DAO.Dish.DishDAO;
 import DAO.Dish.IDishDAO;
 import DAO.Tag.ITagDAO;
 import DAO.Tag.TagDAO;
+import model.Dish;
+import model.Tag;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "RestaurantServlet", urlPatterns = "/restaurant")
 public class RestaurantServlet extends HttpServlet {
@@ -21,29 +23,45 @@ public class RestaurantServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null){
-            action = "";}
+        if (action==null){
+            action="";
+        }
         switch (action){
             case "create":
 
                 break;
-            case "edit":
-
-                break;
-            case "delete":
-
-                break;
-            case "find":
-
-                break;
             default:
-                listUser(request, response);
-                break;
+                showAllDish(request, response);
+
+        }
+    }
+
+    private void showAllDish(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("listDish.jsp");
+        List<Dish> dishes = dishDAO.findAll();
+        request.setAttribute("dishes", dishes);
+        try {
+            dispatcher.forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action==null){
+            action="";
+        }
+        switch (action){
+            case "create":
+
+                break;
+            default:
+//
+        }
 
 
     }

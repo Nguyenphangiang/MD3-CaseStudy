@@ -1,6 +1,7 @@
 package DAO.Tag;
 
 import DAO.Restaurant.RestaurantDAO;
+import config.SingletonConnection;
 import model.DiscountCode;
 import model.Tag;
 
@@ -8,37 +9,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static config.SingletonConnection.getConnection;
 
 public class TagDAO implements ITagDAO{
-    @Override
-    public List<Tag> findAll() {
-        return null;
-    }
-
 
     @Override
     public Tag findById(int id) {
-        Tag tag  = null;
-        try(
-                Connection connection = getConnection();
-                PreparedStatement pstm = connection.prepareStatement(
-                        "select * from the where id = ?"
-                )
-        ) {
-            pstm.setInt(1, id);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()){
-                String tagName = rs.getString("tagName");
-                tag = new Tag(id, tagName);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return tag;
+        return null;
     }
 
     @Override
@@ -60,4 +40,36 @@ public class TagDAO implements ITagDAO{
     public boolean delete(int id) {
         return false;
     }
+
+    @Override
+    public List<Tag> findAll() {
+        return null;
+    }
+
+    @Override
+    public List<Tag> findAllByDishId(int dish_id) {
+        List<Tag> tags = new ArrayList<>();
+        Connection connection = SingletonConnection.getConnection();
+        try (PreparedStatement pstm = connection.prepareStatement(
+                "select id, tagName, luot_them, luot_xem, mat.mon_an_id as dishName from the " +
+                        "join mon_an_tag mat on the.id = mat.the_id and mat.mon_an_id = ?;"))
+        {
+            pstm.setInt(1, dish_id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String tagName = rs.getString("tagName");
+                int viewNumber = rs.getInt("luot_xem");
+                int addNumber = rs.getInt("luot_them");
+
+                Tag tag = new Tag(id, tagName, viewNumber, addNumber);
+                tags.add(tag);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tags;
+    }
+
+
 }
