@@ -14,7 +14,13 @@
   <body>
   <div align="center">
     <table border="1" cellpadding="5">
-      <caption><h2>List of Deal</h2></caption>
+      <caption>
+        <h2>List of Deal</h2> <br>
+        <h3><button  type="button" onclick="location.href = '/restaurant?action=create'">Create new deal</button></h3>
+        <h3><button  type="button" onclick="location.href = '/restaurant?action=listRestaurant'">List of restaurant</button></h3>
+        <h3><button  type="button" onclick="location.href = '/restaurant?action=createRestaurant'">Create new restaurant</button></h3>
+      </caption>
+
       <tr>
         <th>ten deal</th>
         <th>hinh anh</th>

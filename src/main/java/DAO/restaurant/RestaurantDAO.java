@@ -11,6 +11,10 @@ import static config.SingletonConnection.getConnection;
 public class RestaurantDAO implements IRestaurantDAO{
 
     private static final String SELECT_RESTAURANT = "select * from nha_hang where id = ?";
+    private static final String INSERT_INTO_RESTAURANT = "insert into nha_hang ( name, address, phone, open_time, close_time) values (?, ?, ?, ?, ?);";
+    private static final String UPDATE_DEAL = "update nha_hang set name = ?, address = ?, phone = ?, open_time = ?, close_time = ? where id = ?;";
+    private static final String DELETE_RESTAURANT = "delete from nha_hang where id = ?";
+
     @Override
     public List<Restaurant> findAll() {
         List<Restaurant> restaurantList = new ArrayList<>();
@@ -67,16 +71,54 @@ public class RestaurantDAO implements IRestaurantDAO{
 
     @Override
     public boolean update(Restaurant restaurant) {
+        boolean rowUpdated;
+        Connection connection = getConnection();
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DEAL);
+        )
+        {
+            preparedStatement.setString(1, restaurant.getRestaurantName());
+            preparedStatement.setString(2, restaurant.getRestaurantAddress());
+            preparedStatement.setString(3, restaurant.getRestaurantPhone());
+            preparedStatement.setTime(4, restaurant.getOpenTime());
+            preparedStatement.setTime(5, restaurant.getCloseTime());
+            preparedStatement.setInt(6, restaurant.getId());
+
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean save(Restaurant restaurant) {
+        try (
+                Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_RESTAURANT)
+        ){
+            preparedStatement.setString(1, restaurant.getRestaurantName());
+            preparedStatement.setString(2, restaurant.getRestaurantAddress());
+            preparedStatement.setString(3, restaurant.getRestaurantPhone());
+            preparedStatement.setTime(4, restaurant.getOpenTime() );
+            preparedStatement.setTime(5, restaurant.getCloseTime());
+            return preparedStatement.executeUpdate()>0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean delete(int id) {
+        boolean rowDeleted;
+        Connection connection = getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(DELETE_RESTAURANT);){
+            preparedStatement.setInt(1, id);
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }
