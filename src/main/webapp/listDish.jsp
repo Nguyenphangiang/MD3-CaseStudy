@@ -21,17 +21,18 @@
         <th>Note</th>
         <th>Price</th>
 <%--        <th>Discount Price</th>--%>
+        <th>Restaurant Name</th>
         <th>Danh mục Tag</th>
-<%--        <th>Restaurant Name</th>--%>
+
     </tr>
     <c:forEach items="${dishes}" var="d">
         <tr>
-            <td>${d.id}</td>
-            <td>${d.name}</td>
-            <td>${d.image}</td>
-            <td>${d.note}</td>
-            <td>${d.price}</td>
-<%--            <td>${d.restaurant.getrestaurantName}</td>--%>
+            <td>${d.getId()}</td>
+            <td>${d.getDishName()}</td>
+            <td>${d.getDishImage()}</td>
+            <td>${d.getDishNote()}</td>
+            <td>${d.getDishPrice()}</td>
+            <td>${d.restaurant.getRestaurantName()}</td>
             <td>
                 <c:forEach items="${d.tags}" var="tag">
                     <span>${tag.name}</span> &nbsp;

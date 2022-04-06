@@ -1,7 +1,7 @@
 use trua_nay_an_gi;
 select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price,
        mkm.id as id_discount, mkm.khuyen_mai_code as discountCode, mkm.gia_khuyen_mai as discountPrice,
-       nh.id as id_restaurant, nh.name as restaurant, nh.address as address, nh.phone as restaurantPhone
+       nh.id as id_restaurant, nh.name as restaurant, nh.address as address, nh.phone,nh.open_time,nh.close_time
 from mon_an
     join ma_khuyen_mai mkm on mon_an.khuyen_mai_id = mkm.id
     join nha_hang nh on nh.id = mon_an.nha_hang_id;
