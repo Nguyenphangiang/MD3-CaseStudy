@@ -16,7 +16,7 @@ public class DealDAO implements IDealDAO{
     private static final String INSEERT_INTO_DEAL = "insert into deal (name, image, description, deal_price, nha_hang_id) values ( ?, ?, ?, ?, ?);";
     private static final String DELETE_DEAL = "delete from deal where id = ?;";
     private static final String SELECT_DEAL_1 ="select deal.id, deal.name, image, description, deal_price, nh.id, nh.name, nh.address, nh.phone, nh.open_time, nh.close_time from deal join nha_hang nh where deal.id = ?;";
-
+    private static final String UPDATE_DEAL = "update deal set name = ?, image = ?, description = ?, deal_price = ?, nha_hang_id = ? where id = ?;";
     @Override
 
     //danh sach deal mon an
@@ -94,6 +94,30 @@ public class DealDAO implements IDealDAO{
 
     @Override
     public boolean update(Deal deal) {
+        boolean rowUpdated;
+        Connection connection = getConnection();
+        try (
+                PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_DEAL);
+                )
+        {
+            preparedStatement.setString(1, deal.getDealName());
+            preparedStatement.setString(2, deal.getDealImage());
+            preparedStatement.setString(3, deal.getDescription());
+            preparedStatement.setInt(4, deal.getDealPrice());
+            preparedStatement.setInt(5, deal.getRestaurant().getId());
+            preparedStatement.setInt(6, deal.getId());
+            rowUpdated = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+//            statement.setString(1, user.getName());
+//            statement.setString(2, user.getEmail());
+//            statement.setString(3, user.getCountry());
+//            statement.setInt(4, user.getId());
+//
+//            rowUpdated = statement.executeUpdate() > 0;
+//        }
         return false;
     }
 

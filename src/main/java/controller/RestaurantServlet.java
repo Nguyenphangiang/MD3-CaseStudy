@@ -22,9 +22,7 @@ public class RestaurantServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-//                request.setAttribute("restaurant", restaurantDAO.findAll());
-//        RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
-//        requestDispatcher.forward(request, response);
+
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -35,10 +33,10 @@ public class RestaurantServlet extends HttpServlet {
 
                 break;
             case "create":
-
+                showCreateDealForm(request, response);
                 break;
             case "edit":
-
+                showUpdateForm(request, response);
                 break;
             case "delete":
                 showDeleteForm(request, response);
@@ -56,6 +54,21 @@ public class RestaurantServlet extends HttpServlet {
                 listDeal(request, response);
                 break;
         }
+    }
+
+    private void showCreateDealForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("restaurant", restaurantDAO.findAll());
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("create.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    private void showUpdateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Deal existingDeal = dealDAO.findById(id);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("restaurant/edit.jsp");
+        request.setAttribute("deal", existingDeal);
+        request.setAttribute("restaurant", restaurantDAO.findAll());
+        requestDispatcher.forward(request, response);
     }
 
     private void showDeleteForm(HttpServletRequest request, HttpServletResponse response) {
@@ -81,15 +94,7 @@ public class RestaurantServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String nameRestaurant = request.getParameter("name");
-//        String image = request.getParameter("image");
-//        String description = request.getParameter("description");
-//        int price = Integer.parseInt(request.getParameter("price"));
-//        String idString = request.getParameter("restaurant");
-//        int idRestaurant = Integer.parseInt(idString);
-//        Restaurant restaurant = restaurantDAO.findById(idRestaurant);
-//        Deal deal = new Deal(nameRestaurant, image, description, price, restaurant);
-//    dealDAO.save(deal);
+
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -99,7 +104,7 @@ public class RestaurantServlet extends HttpServlet {
 
                 break;
             case "edit":
-
+                updateDeal(request, response);
                 break;
             case "search":
 
@@ -114,11 +119,26 @@ public class RestaurantServlet extends HttpServlet {
         }
     }
 
+    private void updateDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+
+        String name = request.getParameter("name");
+        String image = request.getParameter("image");
+        String description = request.getParameter("description");
+        int price = Integer.parseInt(request.getParameter("price"));
+        String idString = request.getParameter("restaurant");
+        int idRestaurant = Integer.parseInt(idString);
+        Restaurant restaurant = restaurantDAO.findById(idRestaurant);
+        Deal deal = new Deal(id, name, image, description, price, restaurant);
+        dealDAO.update(deal);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("restaurant/edit.jsp");
+        dispatcher.forward(request, response);
+
+    }
+
     private void deleteDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         dealDAO.delete(id);
-//        Deal deal = dealDAO.findById(id);
-//        request.setAttribute("deal", deal);
         request.setAttribute("message", "This deal was deleted");
         RequestDispatcher dispatcher = request.getRequestDispatcher("restaurant/displayDelete.jsp");
         dispatcher.forward(request, response);

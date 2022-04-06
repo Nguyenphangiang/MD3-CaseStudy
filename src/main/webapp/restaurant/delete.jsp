@@ -40,7 +40,7 @@
                 <td>${deal.getRestaurant().getRestaurantName()}</td>
             </tr>
             <tr>
-                <td></td>
+                <td><button  type="button" onclick="location.href = 'restaurant?action=restaurant'">Back to list of deal</button></td>
                 <td><input type="submit" value="delete"></td>
             </tr>
         </table>

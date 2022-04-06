@@ -31,7 +31,7 @@
           <td><c:out value="${s.getDealPrice()}"/></td>
           <td><c:out value="${s.getRestaurant().getRestaurantName()}"/></td>
           <td>
-            <a href="/users?action=edit&id=${s.id}">Edit</a>
+            <a href="/restaurant?action=edit&id=${s.id}">Edit</a>
             <a href="/restaurant?action=delete&id=${s.id}">Delete</a>
           </td>
         </tr>

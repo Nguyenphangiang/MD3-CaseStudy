@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Dish {
     private int id;
     private String dishName;
@@ -7,10 +9,21 @@ public class Dish {
     private String dishNote;
     private int dishPrice;
     private DiscountCode discountCode;
-    private Tag tag;
+    private List<Tag> tag;
     private Restaurant restaurant;
 
-    public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, Tag tag, Restaurant restaurant) {
+    public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, Restaurant restaurant) {
+        this.id = id;
+        this.dishName = dishName;
+        this.dishImage = dishImage;
+        this.dishNote = dishNote;
+        this.dishPrice = dishPrice;
+        this.discountCode = discountCode;
+        this.restaurant = restaurant;
+    }
+
+
+    public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, List<Tag> tag, Restaurant restaurant) {
         this.id = id;
         this.dishName = dishName;
         this.dishImage = dishImage;
@@ -21,7 +34,7 @@ public class Dish {
         this.restaurant = restaurant;
     }
 
-    public Dish(String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, Tag tag, Restaurant restaurant) {
+    public Dish(String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, List<Tag> tag, Restaurant restaurant) {
         this.dishName = dishName;
         this.dishImage = dishImage;
         this.dishNote = dishNote;
@@ -82,11 +95,11 @@ public class Dish {
         this.discountCode = discountCode;
     }
 
-    public Tag getTag() {
+    public List<Tag> getTag() {
         return tag;
     }
 
-    public void setTag(Tag tag) {
+    public void setTag(List<Tag> tag) {
         this.tag = tag;
     }
 
