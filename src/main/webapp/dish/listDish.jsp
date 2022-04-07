@@ -40,6 +40,7 @@
                     <span>${tag.getTagName()}</span> &nbsp;
                 </c:forEach>
             </td>
+            <td><a href="restaurant?action=editDish">Edit</a></td>
         </tr>
     </c:forEach>
 </table>

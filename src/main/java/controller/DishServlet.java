@@ -10,7 +10,6 @@ import DAO.Tag.ITagDAO;
 import DAO.Tag.TagDAO;
 import model.Dish;
 import model.Restaurant;
-import model.Tag;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -19,7 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "RestaurantServlet", urlPatterns = "/restaurant")
-public class RestaurantServlet extends HttpServlet {
+public class DishServlet extends HttpServlet {
     private IDishDAO dishDAO = new DishDAO();
     private IDiscountCodeDAO discountCodeDAO = new DiscountCodeDAO();
     private ITagDAO tagDAO = new TagDAO();
