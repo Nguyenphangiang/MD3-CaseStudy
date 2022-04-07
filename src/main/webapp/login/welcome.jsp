@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -11,7 +12,8 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Dang nhap thanh cong</h1>
-    <a href="/logout">Logout</a>
+    <h1>Login Success</h1>
+    <a href="/RegistrationCollab?action=">aaa</a>
+    <a href="/logout"><input type="submit" value="Logout"></a>
 </body>
 </html>

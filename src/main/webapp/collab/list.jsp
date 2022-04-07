@@ -32,10 +32,10 @@
                 <td><c:out value="${collab.collabName}"/></td>
                 <td><c:out value="${collab.collabEmail}"/></td>
                 <td><c:out value="${collab.getCollabPassword()}"/></td>
-<%--                <td>--%>
-<%--                    <a href="/users?action=edit&id=${user.id}">Edit</a>--%>
-<%--                    <a href="/users?action=delete&id=${user.id}">Delete</a>--%>
-<%--                </td>--%>
+                <td>
+                    <a href="/RegistrationCollab?action=edit&id=${collab.getId()}">Edit</a>
+                    <a href="/RegistrationCollab?action=delete&id=${collab.getId()}">Delete</a>
+                </td>
             </tr>
         </c:forEach>
     </table>

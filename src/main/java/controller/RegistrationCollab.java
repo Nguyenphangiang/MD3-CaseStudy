@@ -26,10 +26,33 @@ public class RegistrationCollab extends HttpServlet{
             case "create":
                 showForm(request, response);
                 break;
+            case "edit":
+                showEditForm(request,response);
+                break;
+            case "delete":
+                delete(request,response);
+                break;
             default:
                 listCollab(request, response);
                 break;
         }
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Collab collab = collabDAO.findById(id);
+        RequestDispatcher requestDispatcher= request.getRequestDispatcher("collab/edit.jsp");
+        request.setAttribute("collab1",collab);
+        requestDispatcher.forward(request,response);
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        collabDAO.delete(id);
+        List<Collab> collabList = collabDAO.selectAllCollab();
+        request.setAttribute("collabList",collabList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("collab/list.jsp");
+        dispatcher.forward(request,response);
     }
 
     private void listCollab(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -54,7 +77,27 @@ public class RegistrationCollab extends HttpServlet{
             case "create":
                save(request, response);
                break;
+            case "edit":
+                updateCollab(request,response);
+                break;
+
         }
+    }
+
+    private void deleteCollab(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void updateCollab(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Collab collab = new Collab(id,name,email,password);
+        collabDAO.update(collab);
+        request.setAttribute("messege","The collab was updated");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("collab/edit.jsp");
+        dispatcher.forward(request,response);
     }
 
     private void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -72,8 +115,5 @@ public class RegistrationCollab extends HttpServlet{
             RequestDispatcher dispatcher = request.getRequestDispatcher("collab/create.jsp");
             dispatcher.forward(request,response);
         }
-
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("collab/create.jsp");
-//        dispatcher.forward(request,response);
     }
 }

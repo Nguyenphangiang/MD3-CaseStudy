@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>Login Form</h1>
-<form method="post">
+<form action="/LoginControl" method="post">
     <p>Tai khoan</p>
     <input type="text" name="username" placeholder="username"/><br>
     <p>Mat khau</p>

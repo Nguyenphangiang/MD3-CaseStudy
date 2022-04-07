@@ -1,5 +1,6 @@
 package DAO.collab;
 
+import config.SingletonConnection;
 import controller.RegistrationCollab;
 import model.Collab;
 
@@ -21,7 +22,23 @@ public class CollabDAO implements ICollabDAO{
 
     @Override
     public Collab findById(int id) {
-        return null;
+        Collab collab = null;
+        Connection connection = getConnection();
+        try (PreparedStatement preparedStatement = connection.prepareStatement("select *from ctv where id=?");)
+        {
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                collab =new Collab(id,name,email,password);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return collab;
+
     }
 
     @Override
@@ -31,6 +48,18 @@ public class CollabDAO implements ICollabDAO{
 
     @Override
     public boolean update(Collab collab) {
+        try(
+                Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement("update ctv set name=?, email=?,password=? where id=?");
+                ){
+            statement.setString(1,collab.getCollabName());
+            statement.setString(2,collab.getCollabEmail());
+            statement.setString(3,collab.getCollabPassword());
+            statement.setInt(4,collab.getId());
+            return statement.executeUpdate()>0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
@@ -70,6 +99,15 @@ public class CollabDAO implements ICollabDAO{
 
     @Override
     public boolean delete(int id) {
+        try(
+                Connection connection = SingletonConnection.getConnection();
+                PreparedStatement statement = connection.prepareStatement("delete from ctv where id = ?");
+                ){
+            statement.setInt(1,id);
+            return statement.executeUpdate()>0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
     public List<Collab> selectAllCollab(){
@@ -81,11 +119,11 @@ public class CollabDAO implements ICollabDAO{
             System.out.println(preparedStatement);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-//                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("id");
                 String collabName = resultSet.getString("name");
                 String collabEmail = resultSet.getString("email");
                 String collabPassword = resultSet.getString("password");
-                collabs.add(new Collab(collabName,collabEmail,collabPassword));
+                collabs.add(new Collab(id,collabName,collabEmail,collabPassword));
             }
         } catch (SQLException e) {
             e.printStackTrace();
