@@ -12,9 +12,9 @@ values ('SeaFood','16 Ngoc Khanh','0911111111','9:00:00','23:59:59'),
 insert into ma_khuyen_mai( khuyen_mai_code, gia_khuyen_mai)
 values ('None',0),('km10',10000),('km20',20000),('km30',30000),('km50',50000);
 insert into the( tagName, luot_them, luot_xem)
-values ('bun',3,0),('grill',1,0),('pho',4,0),('com',11,0),('banh',10,0),('my',7,0),
-       ('do uong',7,0),('trang mieng',8,0),('pizza',3,0),('burger',4,0),('japan',6,0),
-       ('korean',6,0),('thailand',6,0),('italy',4,0),('hongkong',6,0),('fries',2,0);
+values ('bun',0,0),('grill',0,0),('pho',0,0),('com',0,0),('banh',0,0),('my',0,0),
+       ('do uong',0,0),('trang mieng',0,0),('pizza',0,0),('burger',0,0),('japan',0,0),
+       ('korean',0,0),('thailand',0,0),('italy',0,0),('hongkong',0,0),('fries',0,0);
 insert into mon_an(name, image, note, price, nha_hang_id)
 values ('bun hai san','https://img-global.cpcdn.com/recipes/65e122e42382061a/680x482cq70/bun-h%E1%BA%A3i-s%E1%BA%A3n-recipe-main-photo.jpg','su ket hop cua tom,muc,be be tao nen huong vi kho quen',60000,1),
        ('my xao hai san','https://cdn.tgdd.vn/2021/11/CookDishThumb/cach-lam-mi-xao-hai-san-hap-dan-la-mieng-cho-ca-nha-thumb-620x620.jpg','sot hai san voi soi my dai dai, lua chon hoan hao cua ban',55000,1),
@@ -75,6 +75,4 @@ values
        ('burger mini','https://i.pinimg.com/736x/00/a8/93/00a893ab2cc5b2488de0104db8ae02ae--mini-hamburgers-mini-burger.jpg','nho nhan, xinh xan nhung van giu duoc vi ngon',15000,10),
        ('tra chanh','https://file.hstatic.net/1000135323/file/tra-chanh-truyen-thong_299c6fc757e949a798cddc6bbbade8e8_grande.jpg','tra man ket hop chanh tuoi... het nuoc cham',15000,10),
        ('tra xa tac','https://thucthan.com/media/2019/06/tra-tac/hong-tra-tac.jpg','su ket hop moi me tac va xa ... het nuoc cham',15000,10);
-
-
 

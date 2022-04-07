@@ -19,7 +19,7 @@
         <a href="restaurant?action=default">Back to list menu</a>
     </h2>
 </center>
-<div align="center">
+<div >
     <form method="post">
         <table border="1" cellpadding="5">
             <caption>
@@ -49,9 +49,7 @@
             <tr>
                 <th>Dish Note:</th>
                 <td>
-                    <input type="text" name="note" size="255"
-                           value="<c:out value='${dish.getDishNote()}' />"
-                    />
+                    <textarea name="note" cols="45" rows="10">${dish.getDishNote()}</textarea>
                 </td>
             </tr>
             <tr>
@@ -65,18 +63,28 @@
             <tr>
                 <th>Dish Tag:</th>
                 <td>
-                    <c:forEach items="${dish.getTag()}" var="tag">
-                        <span>${tag.getTagName()}</span> &nbsp;
-                    </c:forEach>
+                    <select name="tags" multiple size="20px">
+                        <c:forEach items="${tagList}" var="tag">
+                            <option value="${tag.id}" >${tag.tagName}</option>
+                        </c:forEach>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <th>Restaurant:</th>
-                <td>${dish.getRestaurant().getRestaurantName()}</td>
+                <td><input type="text" name="restaurant" value="${dish.getRestaurant().getRestaurantName()}" readonly/>
+<%--                    ${dish.getRestaurant().getRestaurantName()}</td>--%>
+
+<%--                   <select name="restaurant" id="restaurant">--%>
+<%--                   <c:forEach items="${restaurantList}" var="res">--%>
+<%--                       <option value="${res.id}">${res.restaurantName}</option>--%>
+<%--                   </c:forEach>--%>
+<%--                   </select>--%>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input type="submit" value="Save"/>
+                    <button type="submit" onclick="location.href='/restaurant?action=restaurant'">Save</button>
+                    <button type="button" onclick="location.href='/restaurant?action=restaurant'">Back</button>
                 </td>
             </tr>
         </table>

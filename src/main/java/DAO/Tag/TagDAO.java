@@ -1,8 +1,6 @@
 package DAO.Tag;
 
-import DAO.Restaurant.RestaurantDAO;
 import config.SingletonConnection;
-import model.DiscountCode;
 import model.Tag;
 
 import java.sql.Connection;
@@ -12,13 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static config.SingletonConnection.getConnection;
-
 public class TagDAO implements ITagDAO{
+
     public static final String SQL_SELECT_TAG = "select * from the;";
     private Connection connection = SingletonConnection.getConnection();
     public static final String SQL_SELECT_TAG_BY_ID = "select t.tagName,t.luot_them,t.luot_xem from the t where id = ?;";
     public static final String SQL_SELECT_BY_NAME = "select t.tagName,t.luot_them,t.luot_xem from the t where tagName = ?;";
+
 
     @Override
     public Tag findById(int id) {
@@ -80,10 +78,13 @@ public class TagDAO implements ITagDAO{
         return tagList;
     }
 
+
+
+
     @Override
     public List<Tag> findAllByDishId(int dish_id) {
         List<Tag> tags = new ArrayList<>();
-        Connection connection = SingletonConnection.getConnection();
+
         try (PreparedStatement pstm = connection.prepareStatement(
                 "select id, tagName, luot_them, luot_xem, mat.mon_an_id as dishName from the " +
                         "join mon_an_tag mat on the.id = mat.the_id and mat.mon_an_id = ?;"))
