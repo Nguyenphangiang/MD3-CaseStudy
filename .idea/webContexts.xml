@@ -3,7 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
-        <entry key="file://$PROJECT_DIR$/src/main/webapp/collab/list.jsp" value="file://$PROJECT_DIR$/src/main/webapp/collab" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/restaurant/deleteRestaurant.jsp" value="file://$PROJECT_DIR$/src/main/webapp/restaurant" />
       </map>
     </option>
   </component>

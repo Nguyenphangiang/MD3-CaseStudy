@@ -18,10 +18,7 @@ create table ctv(
                     name nvarchar(50),
                     email nvarchar(50),
                     password nvarchar(50)
-
 );
-
-
 create table ma_khuyen_mai(
                               id int primary key auto_increment,
                               khuyen_mai_code nvarchar(255),
@@ -39,10 +36,8 @@ create table mon_an(
                        image nvarchar(255),
                        note nvarchar(255),
                        price int,
-                       khuyen_mai_id int,
                        nha_hang_id int,
-                       foreign key (nha_hang_id) references  nha_hang(id),
-                       foreign key (khuyen_mai_id) references ma_khuyen_mai(id)
+                       foreign key (nha_hang_id) references  nha_hang(id)
 );
 create table deal(
                      id int primary key auto_increment,
@@ -62,13 +57,14 @@ create table nguoi_dung(
 create table hoa_don(
                         id int primary key auto_increment,
                         hoa_don_code nvarchar(255),
-                        ngay_thang datetime
+                        ngay_thang datetime,
+                        nguoi_dung_id int,
+                        foreign key (nguoi_dung_id) references nguoi_dung(id)
 );
 create table chi_tiet_hoa_don(
     id int primary key auto_increment,
     nguoi_dung_id int,
     mon_an_id int,
-    hoa_don_id int,
     so_luong int,
     foreign key (mon_an_id) references mon_an(id),
     foreign key (nguoi_dung_id)references nguoi_dung(id)
@@ -77,7 +73,7 @@ create table mon_an_tag(
     the_id int,
     mon_an_id int,
     PRIMARY KEY (the_id,mon_an_id),
-    foreign key (the_id) references the(id),
-    foreign key (mon_an_id)references mon_an(id)
+    foreign key (the_id) references the(id) on delete cascade ,
+    foreign key (mon_an_id)references mon_an(id) on delete  cascade
 );
 

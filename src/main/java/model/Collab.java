@@ -6,7 +6,6 @@ public class Collab {
     private String collabEmail;
     private String collabPassword;
 
-
     public Collab(int id, String collabName, String collabEmail, String collabPassword) {
         this.id = id;
         this.collabName = collabName;
@@ -16,10 +15,10 @@ public class Collab {
 
     }
 
-    public Collab(String collabName, String collabEmail, String collabPassword) {
+    public Collab(String collabName, String collabEmail, String collabPassword ) {
         this.collabName = collabName;
         this.collabEmail = collabEmail;
-        this.collabPassword=collabPassword;
+        this.collabPassword = collabPassword;
     }
 
     public Collab() {
@@ -56,14 +55,6 @@ public class Collab {
     public void setCollabPassword(String collabPassword) {
         this.collabPassword = collabPassword;
     }
-
-//    public Restaurant getRestaurant() {
-//        return restaurant;
-//    }
-
-//    public void setRestaurant(Restaurant restaurant) {
-//        this.restaurant = restaurant;
-//    }
 
     @Override
     public String toString() {

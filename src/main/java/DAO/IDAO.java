@@ -15,4 +15,5 @@ public interface IDAO<T> {
 
    boolean delete(int id);
 
+   List<T> findAllByDishId(int id);
 }

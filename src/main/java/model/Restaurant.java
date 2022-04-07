@@ -11,6 +11,11 @@ public class Restaurant {
     private Time openTime;
     private Time closeTime;
 
+    public Restaurant(int id, String restaurantName) {
+        this.id = id;
+        this.restaurantName = restaurantName;
+    }
+
     public Restaurant(int id, String restaurantName, String restaurantAddress, String restaurantPhone, Time openTime, Time closeTime) {
         this.id = id;
         this.restaurantName = restaurantName;

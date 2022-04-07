@@ -8,38 +8,42 @@ public class Dish {
     private String dishImage;
     private String dishNote;
     private int dishPrice;
-    private DiscountCode discountCode;
     private List<Tag> tag;
     private Restaurant restaurant;
 
-    public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, Restaurant restaurant) {
+    public Dish(String dishName, String dishImage, String dishNote, int dishPrice, Restaurant restaurant) {
+        this.dishName = dishName;
+        this.dishImage = dishImage;
+        this.dishNote = dishNote;
+        this.dishPrice = dishPrice;
+        this.restaurant = restaurant;
+    }
+
+    public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice, Restaurant restaurant) {
         this.id = id;
         this.dishName = dishName;
         this.dishImage = dishImage;
         this.dishNote = dishNote;
         this.dishPrice = dishPrice;
-        this.discountCode = discountCode;
         this.restaurant = restaurant;
     }
 
 
-    public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, List<Tag> tag, Restaurant restaurant) {
+    public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice , List<Tag> tag, Restaurant restaurant) {
         this.id = id;
         this.dishName = dishName;
         this.dishImage = dishImage;
         this.dishNote = dishNote;
         this.dishPrice = dishPrice;
-        this.discountCode = discountCode;
         this.tag = tag;
         this.restaurant = restaurant;
     }
 
-    public Dish(String dishName, String dishImage, String dishNote, int dishPrice, DiscountCode discountCode, List<Tag> tag, Restaurant restaurant) {
+    public Dish(String dishName, String dishImage, String dishNote, int dishPrice, List<Tag> tag, Restaurant restaurant) {
         this.dishName = dishName;
         this.dishImage = dishImage;
         this.dishNote = dishNote;
         this.dishPrice = dishPrice;
-        this.discountCode = discountCode;
         this.tag = tag;
         this.restaurant = restaurant;
     }
@@ -87,13 +91,6 @@ public class Dish {
         this.dishPrice = dishPrice;
     }
 
-    public DiscountCode getDiscountCode() {
-        return discountCode;
-    }
-
-    public void setDiscountCode(DiscountCode discountCode) {
-        this.discountCode = discountCode;
-    }
 
     public List<Tag> getTag() {
         return tag;
@@ -119,7 +116,6 @@ public class Dish {
                 ", dishImage='" + dishImage + '\'' +
                 ", dishNote='" + dishNote + '\'' +
                 ", dishPrice=" + dishPrice +
-                ", discountCode=" + discountCode +
                 ", tag=" + tag +
                 ", restaurant=" + restaurant +
                 '}';

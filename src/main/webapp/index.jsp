@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  $END$
+  <img src="https://images.japancentre.com/images/pics/2143/original/original.jpg?1548744035" alt="">
   </body>
 </html>
