@@ -11,8 +11,6 @@ public class Collab {
         this.collabName = collabName;
         this.collabEmail = collabEmail;
         this.collabPassword = collabPassword;
-
-
     }
 
     public Collab(String collabName, String collabEmail, String collabPassword ) {

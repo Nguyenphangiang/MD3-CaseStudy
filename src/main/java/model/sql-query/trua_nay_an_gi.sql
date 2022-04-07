@@ -77,3 +77,7 @@ create table mon_an_tag(
     foreign key (mon_an_id)references mon_an(id) on delete  cascade
 );
 
+
+delete from mon_an where id = ?;
+
+
