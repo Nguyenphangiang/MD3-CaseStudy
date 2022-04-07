@@ -34,6 +34,7 @@ insert into mon_an(name, image, note, price, khuyen_mai_id, nha_hang_id) values
 #                                 "from mon_an" +
 #                                 "join nha_hang nh on nh.id = mon_an.nha_hang_id where id =?;se
 select ma.id as id, ma.name as name, ma.image as image, ma.note as note, ma.price as price, nh.id as id_restaurant, nh.name as restaurant from mon_an ma join nha_hang nh on ma.nha_hang_id = nh.id where ma.id = 1;
-
+select ma.id as id, ma.name as name, ma.image as image, ma.note as note, ma.price as price, nh.id as id_restaurant, nh.name as restaurant from mon_an ma
+                                join nha_hang nh on ma.nha_hang_id = nh.id;
 
 

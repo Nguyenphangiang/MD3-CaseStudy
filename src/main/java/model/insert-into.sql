@@ -23,3 +23,9 @@ values ('bun hai san','jpg/bun-hai-san.jpg','su ket hop cua tom,muc,be be tao ne
        ('tra dao','jpg/tra-dao.jpg','huong vi kho quen den tu nhung qua dao chin mong',12000,1),
        ('my udon','jpg/my-udon.jpg','soi my to cung vs nuoc dung katsuo cuc ky thom ngon bo duong',40000,1);
 
+insert into mon_an_tag(the_id, mon_an_id) VALUE (1, 1),
+    (1,2),
+    (2,2),
+    (2,1);
+select * from the order by luot_them DESC ;
+select tagName, luot_them from the order by luot_them DESC limit 0,3;

@@ -14,6 +14,9 @@
 <body>
 <h1>Danh sach mon an</h1>
 <h2>
+    <a href="restaurant?action=showMaxAddNumber">Max Add Number</a>
+</h2>
+<h2>
     <a href="restaurant?action=createDish">Add New Dish</a>
 </h2>
 <table border="1px solid">
@@ -41,6 +44,8 @@
                 </c:forEach>
             </td>
             <td><a href="restaurant?action=editDish&id=${d.id}">Edit</a></td>
+
+
         </tr>
     </c:forEach>
 </table>

@@ -57,6 +57,27 @@ public class TagDAO implements ITagDAO{
         }
         return tags;
     }
+    public List<Tag> findMaxAddNumber(){
+        List<Tag> tags = new ArrayList<>();
+        try( PreparedStatement preparedStatement = connection.prepareStatement(
+                "select tagName, luot_them from the order by luot_them DESC limit 0,3;"
+                )) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String tagName = resultSet.getString("tagName");
+                int addNumber = resultSet.getInt("luot_them");
+                Tag tag = new Tag(tagName, addNumber);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tags;
+    }
+
+    public static void main(String[] args) {
+        ITagDAO tagDAO = new TagDAO();
+        System.out.println(tagDAO.findMaxAddNumber());
+    }
 
 
 
@@ -85,6 +106,7 @@ public class TagDAO implements ITagDAO{
         }
         return tags;
     }
+
 
 
 }

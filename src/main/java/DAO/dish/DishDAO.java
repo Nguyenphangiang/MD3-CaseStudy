@@ -123,17 +123,46 @@ public class DishDAO implements IDishDAO {
 
     public static void main(String[] args) {
         IDishDAO dishDAO = new DishDAO();
-        System.out.println(dishDAO.findById(1));
+        System.out.println(dishDAO.findByName("bun hai san"));
     }
 
     @Override
     public Dish findByName(String name) {
-        return null;
+        Dish dish  = null;
+        try(
+                Connection connection = getConnection();
+                PreparedStatement pstm = connection.prepareStatement(
+                        "select ma.id as id, ma.name as name, ma.image as image, ma.note as note, ma.price as price, nh.id as id_restaurant, nh.name as restaurant from mon_an ma " +
+                                "join nha_hang nh on ma.nha_hang_id = nh.id where ma.name = ?;"
+                )
+        ) {
+            pstm.setString(1, name);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String image = rs.getString("image");
+                String note = rs.getString("note");
+                int price = rs.getInt("price");
+
+                List<Tag> tags = tagDAO.findAllByDishId(id);
+
+                int id_restaurant = rs.getInt("id_restaurant");
+                String restaurantName = rs.getString("restaurant");
+                Restaurant restaurant = new Restaurant(id_restaurant, restaurantName);
+
+                dish = new Dish(id, name, image, note, price, tags, restaurant);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dish;
     }
 
     @Override
     public boolean update(Dish dish) {
-        return false;
+        boolean rowUpdated = false;
+
+        return rowUpdated;
     }
 
     @Override
@@ -158,6 +187,20 @@ public class DishDAO implements IDishDAO {
 
     @Override
     public boolean delete(int id) {
-        return false;
+        boolean rowDeleted = false;
+        try {
+            PreparedStatement preparedStatement1 = connection.prepareStatement(
+                    ""
+            );
+            PreparedStatement preparedStatement = connection.prepareStatement(
+                    "delete from mon_an where id = ?"
+            );
+            preparedStatement.setInt(1, id);
+            rowDeleted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return rowDeleted;
     }
 }
