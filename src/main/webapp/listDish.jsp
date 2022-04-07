@@ -13,6 +13,9 @@
 </head>
 <body>
 <h1>Danh sach mon an</h1>
+<h2>
+    <a href="restaurant?action=createDish">Add New Dish</a>
+</h2>
 <table border="1px solid">
     <tr>
         <th>#</th>

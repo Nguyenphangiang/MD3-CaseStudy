@@ -15,17 +15,46 @@ import java.util.List;
 import static config.SingletonConnection.getConnection;
 
 public class DishDAO implements IDishDAO {
+    Connection connection = SingletonConnection.getConnection();
     ITagDAO tagDAO = new TagDAO();
 
     @Override
-    public void save(Dish dish, int[] categories) {
+    public void save(Dish dish, int[] tags) {
+        int dish_id = 0;
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement statement = connection.prepareStatement(
+                    "insert into mon_an(name, image, note, price, nha_hang_id)\n" +
+                            "VALUE (?,?,?,?,?,?)\n) ", Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, dish.getDishName());
+            statement.setString(2, dish.getDishImage());
+            statement.setString(3, dish.getDishNote());
+            statement.setInt(4, dish.getDishPrice());
+            statement.setInt(5, dish.getRestaurant().getId());
 
+            int a1 = statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            while (resultSet.next()){
+                System.out.println(resultSet);
+                dish_id= resultSet.getInt(1);
+                PreparedStatement statement1 = connection.prepareStatement("insert into mon_an_tag(the_id, mon_an_id) VALUE (?,?)");
+                for (int tag_id: tags
+                ) {
+                    statement.setInt(1,tag_id);
+                    statement.setInt(2,dish_id);
+                    statement.executeUpdate();
+                }
+                connection.commit();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public List<Dish> findAll() {
         List<Dish> dishes = new ArrayList<>();
-        Connection connection = SingletonConnection.getConnection();
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price,\n" +
                         "nh.id as id_restaurant, nh.name as restaurant, nh.address as address, nh.phone,nh.open_time,nh.close_time \n" +
@@ -64,31 +93,40 @@ public class DishDAO implements IDishDAO {
     @Override
     public Dish findById(int id) {
         Dish dish  = null;
-//        try(
-//                Connection connection = getConnection();
-//                PreparedStatement pstm = connection.prepareStatement(
-//                        "select * from mon_an where id = ?"
-//                )
-//        ) {
-//            pstm.setInt(1, id);
-//            ResultSet rs = pstm.executeQuery();
-//            while (rs.next()){
-//                String name = rs.getString("name");
-//                String img = rs.getString("img");
-//                String note = rs.getString("note");
-//                int price = rs.getInt("price");
-//                int id_discount = rs.getInt("khuyen_mai_id");
-//                int id_tag = rs.getInt("tag_id");
-//                int id_restaurant = rs.getInt("nha_hang_id");
-//                dish = new Dish(id, name, img, note, price, )
+        try(
+                Connection connection = getConnection();
+                PreparedStatement pstm = connection.prepareStatement(
+                        "select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price," +
+                                "nh.name as restaurant" +
+                                "from mon_an" +
+                                "join nha_hang nh on nh.id = mon_an.nha_hang_id where id =?;"
+                )
+        ) {
+            pstm.setInt(1, id);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                String note = rs.getString("note");
+                int price = rs.getInt("price");
 
+                List<Tag> tags = tagDAO.findAllByDishId(id);
 
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+                int id_restaurant = rs.getInt("id_restaurant");
+                String restaurantName = rs.getString("restaurant");
+                Restaurant restaurant = new Restaurant(id_restaurant, restaurantName);
+
+                dish = new Dish(id, name, image, note, price, tags, restaurant);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return dish;
+    }
 
+    public static void main(String[] args) {
+        IDishDAO dishDAO = new DishDAO();
+        System.out.println(dishDAO.findById(1));
     }
 
     @Override
@@ -103,6 +141,21 @@ public class DishDAO implements IDishDAO {
 
     @Override
     public boolean save(Dish dish) {
+        try(
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "insert into mon_an(name, image, note, price, nha_hang_id)\\n\" +\n" +
+                                "                            \"VALUE (?,?,?,?,?,?)\\n)")
+
+        ){
+            preparedStatement.setString(1, dish.getDishName());
+            preparedStatement.setString(2, dish.getDishImage());
+            preparedStatement.setString(3, dish.getDishNote());
+            preparedStatement.setInt(4, dish.getDishPrice());
+            preparedStatement.setInt(5, dish.getRestaurant().getId());
+            return preparedStatement.executeUpdate()>0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

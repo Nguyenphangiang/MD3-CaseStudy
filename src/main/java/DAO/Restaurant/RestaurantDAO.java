@@ -2,18 +2,38 @@ package DAO.Restaurant;
 
 
 
+import config.SingletonConnection;
 import model.Restaurant;
+import model.Tag;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static config.SingletonConnection.getConnection;
 
 public class RestaurantDAO implements IRestaurantDAO {
+    Connection connection = SingletonConnection.getConnection();
     @Override
     public List<Restaurant> findAll() {
-        return null;
+        List<Restaurant> restaurants = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "select id, name from nha_hang; "
+        )){
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String restaurantName = rs.getString("name");
+                Restaurant restaurant = new Restaurant(id, restaurantName);
+                restaurants.add(restaurant);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return restaurants;
     }
+
 
 
     @Override

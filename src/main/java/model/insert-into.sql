@@ -21,4 +21,5 @@ values ('bun hai san','jpg/bun-hai-san.jpg','su ket hop cua tom,muc,be be tao ne
        ('com hai san','jpg/com-hai-san.jpg','hat com mem duoc dung voi tom,muc,so diep goi nho ve tai nguyen bien',55000,1),
        ('nuoc ep tao','jpg/nuoc-ep-tao.jpg','su chon loc ky luong tu nhung qua tao ngon nhat',10000,1),
        ('tra dao','jpg/tra-dao.jpg','huong vi kho quen den tu nhung qua dao chin mong',12000,1),
-       ('my udon','jpg/my-udon.jpg','soi my to cung vs nuoc dung katsuo cuc ky thom ngon bo duong',40000,1),
+       ('my udon','jpg/my-udon.jpg','soi my to cung vs nuoc dung katsuo cuc ky thom ngon bo duong',40000,1);
+
