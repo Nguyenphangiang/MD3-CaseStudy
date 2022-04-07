@@ -57,16 +57,15 @@ create table nguoi_dung(
 create table hoa_don(
                         id int primary key auto_increment,
                         hoa_don_code nvarchar(255),
-                        ngay_thang datetime
+                        ngay_thang datetime,
+                        nguoi_dung_id int,
+                        foreign key (nguoi_dung_id) references nguoi_dung(id)
 );
 create table chi_tiet_hoa_don(
     id int primary key auto_increment,
     nguoi_dung_id int,
     mon_an_id int,
-    hoa_don_id int,
     so_luong int,
-    ma_khuyen_mai_id int,
-    foreign key (ma_khuyen_mai_id) references ma_khuyen_mai(id),
     foreign key (mon_an_id) references mon_an(id),
     foreign key (nguoi_dung_id)references nguoi_dung(id)
 );
@@ -77,6 +76,8 @@ create table mon_an_tag(
     foreign key (the_id) references the(id),
     foreign key (mon_an_id)references mon_an(id)
 );
+
+
 
 
 

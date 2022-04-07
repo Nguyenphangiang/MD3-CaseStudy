@@ -12,6 +12,7 @@ import java.util.List;
 import static config.SingletonConnection.getConnection;
 
 public class RestaurantDAO implements IRestaurantDAO {
+<<<<<<< HEAD
     public static final String SQL_SELECT_RESTAURANT = "select * from nha_hang;";
     private Connection connection = SingletonConnection.getConnection();
     @Override
@@ -39,7 +40,29 @@ public class RestaurantDAO implements IRestaurantDAO {
             e.printStackTrace();
         }
         return restaurantList;
+=======
+    Connection connection = SingletonConnection.getConnection();
+    @Override
+    public List<Restaurant> findAll() {
+        List<Restaurant> restaurants = new ArrayList<>();
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "select id, name from nha_hang; "
+        )){
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String restaurantName = rs.getString("name");
+                Restaurant restaurant = new Restaurant(id, restaurantName);
+                restaurants.add(restaurant);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return restaurants;
+>>>>>>> a021551266338569ce8b3be98aa3b3008f17746c
     }
+
 
 
     @Override
