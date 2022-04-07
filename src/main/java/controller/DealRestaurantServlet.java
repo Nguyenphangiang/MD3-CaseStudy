@@ -1,9 +1,10 @@
 package controller;
 
+import DAO.Restaurant.RestaurantDAO;
 import DAO.deal.DealDAO;
 import DAO.deal.IDealDAO;
 import DAO.restaurant.IRestaurantDAO;
-import DAO.restaurant.RestaurantDAO;
+
 import model.Deal;
 import model.Restaurant;
 
@@ -25,6 +26,7 @@ import java.util.SimpleTimeZone;
 public class DealRestaurantServlet extends HttpServlet {
     private IDealDAO dealDAO = new DealDAO();
     private IRestaurantDAO restaurantDAO = new RestaurantDAO();
+//    private IRestaurantDAO restaurantDAO = new DAO.Restaurant.RestaurantDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");

@@ -4,7 +4,7 @@ import DAO.DiscountCode.DiscountCodeDAO;
 import DAO.DiscountCode.IDiscountCodeDAO;
 import DAO.Dish.DishDAO;
 import DAO.Dish.IDishDAO;
-import DAO.Restaurant.IRestaurantDAO;
+import DAO.restaurant.IRestaurantDAO;
 import DAO.Restaurant.RestaurantDAO;
 import DAO.Tag.ITagDAO;
 import DAO.Tag.TagDAO;
