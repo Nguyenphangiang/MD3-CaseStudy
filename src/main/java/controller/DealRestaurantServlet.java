@@ -1,10 +1,9 @@
 package controller;
 
-import DAO.Restaurant.RestaurantDAO;
+import DAO.restaurant.IRestaurantDAO;
+import DAO.restaurant.RestaurantDAO;
 import DAO.deal.DealDAO;
 import DAO.deal.IDealDAO;
-import DAO.Restaurant.IRestaurantDAO;
-
 import model.Deal;
 import model.Restaurant;
 
@@ -20,7 +19,6 @@ import java.text.ParseException;
 public class DealRestaurantServlet extends HttpServlet {
     private IDealDAO dealDAO = new DealDAO();
     private IRestaurantDAO restaurantDAO = new RestaurantDAO();
-//    private IRestaurantDAO restaurantDAO = new DAO.Restaurant.RestaurantDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
