@@ -3,7 +3,7 @@ package controller;
 import DAO.Restaurant.RestaurantDAO;
 import DAO.deal.DealDAO;
 import DAO.deal.IDealDAO;
-import DAO.restaurant.IRestaurantDAO;
+import DAO.Restaurant.IRestaurantDAO;
 
 import model.Deal;
 import model.Restaurant;
@@ -13,14 +13,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.sql.Time;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
-import java.util.SimpleTimeZone;
 
 @WebServlet(name = "RestaurantServlet", urlPatterns = "/restaurant")
 public class DealRestaurantServlet extends HttpServlet {

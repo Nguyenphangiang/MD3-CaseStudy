@@ -4,7 +4,6 @@ package DAO.Restaurant;
 
 import config.SingletonConnection;
 import model.Restaurant;
-import model.Tag;
 
 import java.sql.*;
 import java.util.ArrayList;
