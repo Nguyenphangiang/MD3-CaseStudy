@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.SimpleTimeZone;
 
 @WebServlet(name = "RestaurantServlet", urlPatterns = "/restaurant")
-public class RestaurantServlet extends HttpServlet {
+public class DealRestaurantServlet extends HttpServlet {
     private IDealDAO dealDAO = new DealDAO();
     private IRestaurantDAO restaurantDAO = new RestaurantDAO();
     @Override
