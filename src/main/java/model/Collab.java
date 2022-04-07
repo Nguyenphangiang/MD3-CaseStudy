@@ -5,22 +5,21 @@ public class Collab {
     private String collabName;
     private String collabEmail;
     private String collabPassword;
-//    private String restaurant;
 
-    public Collab(int id, String collabName, String collabEmail, String collabPassword, String restaurant) {
+
+    public Collab(int id, String collabName, String collabEmail, String collabPassword) {
         this.id = id;
         this.collabName = collabName;
         this.collabEmail = collabEmail;
         this.collabPassword = collabPassword;
-//        this.restaurant =restaurant;
+
 
     }
 
-    public Collab(String collabName, String collabEmail, String collabPassword, Restaurant restaurant) {
+    public Collab(String collabName, String collabEmail, String collabPassword) {
         this.collabName = collabName;
         this.collabEmail = collabEmail;
-        this.collabPassword = collabPassword;
-//        this.restaurant = restaurant;
+        this.collabPassword=collabPassword;
     }
 
     public Collab() {
@@ -73,7 +72,6 @@ public class Collab {
                 ", collabName='" + collabName + '\'' +
                 ", collabEmail='" + collabEmail + '\'' +
                 ", collabPassword='" + collabPassword + '\'' +
-//                ", restaurant=" + restaurant +
                 '}';
     }
 }
