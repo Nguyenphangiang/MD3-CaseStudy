@@ -9,6 +9,11 @@ public class Tag {
     private int addNumber;
     private List<Dish> dishList;
 
+    public Tag(int id, String tagName) {
+        this.id = id;
+        this.tagName = tagName;
+    }
+
     public List<Dish> getDishList() {
         return dishList;
     }

@@ -42,21 +42,7 @@ public class TagDAO implements ITagDAO{
 
     @Override
     public Tag findByName(String name) {
-        Tag tag = null;
-        try(Connection connection = SingletonConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_BY_NAME)) {
-        preparedStatement.setString(1,name);
-        ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()){
-            int idTag = rs.getInt("id");
-            int addTagNumber = rs.getInt("luot_them");
-            int addViewNumber = rs.getInt("luot_xem");
-            tag = new Tag(idTag,name,addTagNumber,addViewNumber);
-        }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return tag;
+        return null;
     }
 
     @Override

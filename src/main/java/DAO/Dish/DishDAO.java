@@ -166,6 +166,21 @@ public class DishDAO implements IDishDAO {
 
     @Override
     public boolean save(Dish dish) {
+        try(
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "insert into mon_an(name, image, note, price, nha_hang_id)\\n\" +\n" +
+                                "                            \"VALUE (?,?,?,?,?,?)\\n)")
+
+        ){
+            preparedStatement.setString(1, dish.getDishName());
+            preparedStatement.setString(2, dish.getDishImage());
+            preparedStatement.setString(3, dish.getDishNote());
+            preparedStatement.setInt(4, dish.getDishPrice());
+            preparedStatement.setInt(5, dish.getRestaurant().getId());
+            return preparedStatement.executeUpdate()>0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
@@ -173,6 +188,4 @@ public class DishDAO implements IDishDAO {
     public boolean delete(int id) {
         return false;
     }
-
-
 }
