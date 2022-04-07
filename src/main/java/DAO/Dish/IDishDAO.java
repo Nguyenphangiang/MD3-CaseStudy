@@ -4,5 +4,7 @@ import DAO.IDAO;
 import model.Dish;
 
 public interface IDishDAO extends IDAO<Dish> {
-    public void save(Dish dish, int[] categories);
+     void save(Dish dish, int[] tags);
+
+    boolean update(Dish dish, int[] tags);
 }

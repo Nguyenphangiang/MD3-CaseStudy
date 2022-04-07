@@ -4,6 +4,8 @@ import DAO.restaurant.IRestaurantDAO;
 import DAO.restaurant.RestaurantDAO;
 import DAO.deal.DealDAO;
 import DAO.deal.IDealDAO;
+import DAO.restaurant.IRestaurantDAO;
+
 import model.Deal;
 import model.Restaurant;
 
@@ -15,10 +17,11 @@ import java.io.IOException;
 import java.sql.Time;
 import java.text.ParseException;
 
-@WebServlet(name = "RestaurantServlet", urlPatterns = "/restaurant")
+@WebServlet(name = "DealRestaurantServlet", urlPatterns = "/restaurantHome")
 public class DealRestaurantServlet extends HttpServlet {
     private IDealDAO dealDAO = new DealDAO();
     private IRestaurantDAO restaurantDAO = new RestaurantDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -112,6 +115,8 @@ public class DealRestaurantServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
+
+
     private void listDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                         request.setAttribute("deal", dealDAO.findAll());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("restaurant/deal/listDeal.jsp");
@@ -190,6 +195,7 @@ public class DealRestaurantServlet extends HttpServlet {
         dispatcher.forward(request, response);
 
     }
+
 
     private void insertDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");

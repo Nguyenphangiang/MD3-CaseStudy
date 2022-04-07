@@ -11,16 +11,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TagDAO implements ITagDAO{
-    Connection connection = SingletonConnection.getConnection();
+
+    public static final String SQL_SELECT_TAG = "select * from the;";
+    private Connection connection = SingletonConnection.getConnection();
+    public static final String SQL_SELECT_TAG_BY_ID = "select t.tagName,t.luot_them,t.luot_xem from the t where id = ?;";
+    public static final String SQL_SELECT_BY_NAME = "select t.tagName,t.luot_them,t.luot_xem from the t where tagName = ?;";
+
 
     @Override
     public Tag findById(int id) {
-        return null;
+        Tag tag = null;
+        try(Connection connection = SingletonConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_TAG_BY_ID)) {
+        preparedStatement.setInt(1,id);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()){
+            String tagName = rs.getString("tagName");
+            int addTagNumber = rs.getInt("luot_them");
+            int viewTagNumber = rs.getInt("luot_xem");
+            tag = new Tag(id,tagName,addTagNumber,viewTagNumber);
+            return tag;
+        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tag ;
     }
 
     @Override
     public Tag findByName(String name) {
-        return null;
+        Tag tag = null;
+        try(Connection connection = SingletonConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_BY_NAME)) {
+        preparedStatement.setString(1,name);
+        ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()){
+            int idTag = rs.getInt("id");
+            int addTagNumber = rs.getInt("luot_them");
+            int addViewNumber = rs.getInt("luot_xem");
+            tag = new Tag(idTag,name,addTagNumber,addViewNumber);
+        }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tag;
     }
 
     @Override
@@ -40,22 +74,22 @@ public class TagDAO implements ITagDAO{
 
     @Override
     public List<Tag> findAll() {
-        List<Tag> tags = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "select id, tagName from the; "
-        )){
-           ResultSet rs = preparedStatement.executeQuery();
-           while (rs.next()){
-               int id = rs.getInt("id");
-               String tagName = rs.getString("tagName");
-               Tag tag = new Tag(id, tagName);
-               tags.add(tag);
-           }
-
+        List<Tag> tagList = new ArrayList<>();
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQL_SELECT_TAG);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("tagName");
+                int addNumber = rs.getInt("luot_them");
+                int addView = rs.getInt("luot_xem");
+                Tag newTag = new Tag(id,name,addNumber,addView);
+                tagList.add(newTag);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return tags;
+        return tagList;
     }
 
 
