@@ -1,4 +1,4 @@
-package DAO.Dish;
+package DAO.dish;
 
 import DAO.IDAO;
 import model.Dish;

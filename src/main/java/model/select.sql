@@ -28,8 +28,12 @@ insert into mon_an(name, image, note, price, khuyen_mai_id, nha_hang_id) values
 ('com tho', 'jhk', 'com cha trung', 50000, 1, 2),
 ('Bun bo', 'hgj', 'nuoc ham cu qua', 35000, 2, 3),
 ('Bun mong', 'hghfj', 'ngon het nuoc cham', 60000, 2, 4);
-select id, tagName, luot_them, luot_xem, mat.mon_an_id as dishName from the join mon_an_tag mat on the.id = mat.the_id and mat.mon_an_id = 1;
-
+# select id, tagName, luot_them, luot_xem, mat.mon_an_id as dishName from the join mon_an_tag mat on the.id = mat.the_id and mat.mon_an_id = 1;
+# select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price," +
+#                                 "nh.name as restaurant" +
+#                                 "from mon_an" +
+#                                 "join nha_hang nh on nh.id = mon_an.nha_hang_id where id =?;se
+select ma.id as id, ma.name as name, ma.image as image, ma.note as note, ma.price as price, nh.id as id_restaurant, nh.name as restaurant from mon_an ma join nha_hang nh on ma.nha_hang_id = nh.id where ma.id = 1;
 
 
 

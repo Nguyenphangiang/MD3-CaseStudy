@@ -1,4 +1,4 @@
-package DAO.DiscountCode;
+package DAO.discountCode;
 
 import model.DiscountCode;
 

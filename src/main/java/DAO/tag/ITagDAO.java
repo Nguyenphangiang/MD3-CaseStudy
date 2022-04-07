@@ -1,4 +1,4 @@
-package DAO.Tag;
+package DAO.tag;
 
 import DAO.IDAO;
 import model.Tag;

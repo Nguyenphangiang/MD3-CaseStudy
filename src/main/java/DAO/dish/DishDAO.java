@@ -1,9 +1,8 @@
-package DAO.Dish;
+package DAO.dish;
 
-import DAO.Tag.ITagDAO;
-import DAO.Tag.TagDAO;
+import DAO.tag.ITagDAO;
+import DAO.tag.TagDAO;
 import config.SingletonConnection;
-import model.DiscountCode;
 import model.Dish;
 import model.Restaurant;
 import model.Tag;
@@ -96,10 +95,8 @@ public class DishDAO implements IDishDAO {
         try(
                 Connection connection = getConnection();
                 PreparedStatement pstm = connection.prepareStatement(
-                        "select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price," +
-                                "nh.name as restaurant" +
-                                "from mon_an" +
-                                "join nha_hang nh on nh.id = mon_an.nha_hang_id where id =?;"
+                        "select ma.id as id, ma.name as name, ma.image as image, ma.note as note, ma.price as price, nh.id as id_restaurant, nh.name as restaurant from mon_an ma " +
+                                "join nha_hang nh on ma.nha_hang_id = nh.id where ma.id = ?;"
                 )
         ) {
             pstm.setInt(1, id);

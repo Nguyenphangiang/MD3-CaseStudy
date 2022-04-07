@@ -1,13 +1,13 @@
 package controller;
 
-import DAO.DiscountCode.DiscountCodeDAO;
-import DAO.DiscountCode.IDiscountCodeDAO;
-import DAO.Dish.DishDAO;
-import DAO.Dish.IDishDAO;
-import DAO.Restaurant.IRestaurantDAO;
-import DAO.Restaurant.RestaurantDAO;
-import DAO.Tag.ITagDAO;
-import DAO.Tag.TagDAO;
+import DAO.discountCode.DiscountCodeDAO;
+import DAO.discountCode.IDiscountCodeDAO;
+import DAO.dish.DishDAO;
+import DAO.dish.IDishDAO;
+import DAO.restaurant.IRestaurantDAO;
+import DAO.restaurant.RestaurantDAO;
+import DAO.tag.ITagDAO;
+import DAO.tag.TagDAO;
 import model.Dish;
 import model.Restaurant;
 
@@ -44,20 +44,20 @@ public class DishServlet extends HttpServlet {
     private void editDishForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Dish existingDish = dishDAO.findById(id);
-        RequestDispatcher rd = request.getRequestDispatcher("editDish.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("dish/editDish.jsp");
         request.setAttribute("dish", existingDish);
         rd.forward(request, response);
     }
 
     private void insertNewDishForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("insertDishForm.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("dish/insertDishForm.jsp");
         request.setAttribute("tags", tagDAO.findAll());
         request.setAttribute("restaurants", restaurantDAO.findAll());
         rd.forward(request, response);
     }
 
     private void showAllDish(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("listDish.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("dish/listDish.jsp");
         List<Dish> dishes = dishDAO.findAll();
         request.setAttribute("dishes", dishes);
         try {
@@ -79,7 +79,8 @@ public class DishServlet extends HttpServlet {
             case "create":
                 insertNewDish(request, response);
                 break;
-
+            case "edit":
+                break;
             default:
         }
     }

@@ -1,8 +1,6 @@
-package DAO.Tag;
+package DAO.tag;
 
-import DAO.Restaurant.RestaurantDAO;
 import config.SingletonConnection;
-import model.DiscountCode;
 import model.Tag;
 
 import java.sql.Connection;
@@ -11,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static config.SingletonConnection.getConnection;
 
 public class TagDAO implements ITagDAO{
     Connection connection = SingletonConnection.getConnection();
