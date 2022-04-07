@@ -16,7 +16,7 @@
     <table border="1" cellpadding="5">
         <caption>
             <h2>List of Deal</h2> <br>
-            <button  type="button" onclick="location.href = '/restaurant?action=createRestaurant'">Back to home</button>
+            <button  type="button" onclick="location.href = '/restaurantHome?action=createRestaurant'">Back to home</button>
         </caption>
 
         <tr>
@@ -35,7 +35,7 @@
                 <td><c:out value="${s.getDealPrice()}"/></td>
                 <td><c:out value="${s.getRestaurant().getRestaurantName()}"/></td>
                 <td>
-                    <a href="/restaurant?action=edit&id=${s.id}">Oder</a>
+                    <a href="/restaurantHome?action=edit&id=${s.id}">Oder</a>
                 </td>
             </tr>
         </c:forEach>

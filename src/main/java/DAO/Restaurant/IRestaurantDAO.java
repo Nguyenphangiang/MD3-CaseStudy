@@ -1,4 +1,4 @@
-package DAO.Restaurant;
+package DAO.restaurant;
 
 import DAO.IDAO;
 import model.Restaurant;

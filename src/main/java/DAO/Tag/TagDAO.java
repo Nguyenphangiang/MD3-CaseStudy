@@ -1,8 +1,6 @@
 package DAO.Tag;
 
-import DAO.Restaurant.RestaurantDAO;
 import config.SingletonConnection;
-import model.DiscountCode;
 import model.Tag;
 
 import java.sql.Connection;
@@ -12,17 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static config.SingletonConnection.getConnection;
-
 public class TagDAO implements ITagDAO{
-<<<<<<< HEAD
+
     public static final String SQL_SELECT_TAG = "select * from the;";
     private Connection connection = SingletonConnection.getConnection();
     public static final String SQL_SELECT_TAG_BY_ID = "select t.tagName,t.luot_them,t.luot_xem from the t where id = ?;";
     public static final String SQL_SELECT_BY_NAME = "select t.tagName,t.luot_them,t.luot_xem from the t where tagName = ?;";
-=======
-    Connection connection = SingletonConnection.getConnection();
->>>>>>> a021551266338569ce8b3be98aa3b3008f17746c
+
 
     @Override
     public Tag findById(int id) {
@@ -80,7 +74,6 @@ public class TagDAO implements ITagDAO{
 
     @Override
     public List<Tag> findAll() {
-<<<<<<< HEAD
         List<Tag> tagList = new ArrayList<>();
         try {
             PreparedStatement statement = connection.prepareStatement(SQL_SELECT_TAG);
@@ -97,24 +90,6 @@ public class TagDAO implements ITagDAO{
             e.printStackTrace();
         }
         return tagList;
-=======
-        List<Tag> tags = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "select id, tagName from the; "
-        )){
-           ResultSet rs = preparedStatement.executeQuery();
-           while (rs.next()){
-               int id = rs.getInt("id");
-               String tagName = rs.getString("tagName");
-               Tag tag = new Tag(id, tagName);
-               tags.add(tag);
-           }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return tags;
->>>>>>> a021551266338569ce8b3be98aa3b3008f17746c
     }
 
 

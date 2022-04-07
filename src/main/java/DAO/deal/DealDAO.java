@@ -151,4 +151,9 @@ public class DealDAO implements IDealDAO{
         }
         return false;
     }
+
+    @Override
+    public List<Deal> findAllByDishId(int id) {
+        return null;
+    }
 }

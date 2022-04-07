@@ -86,7 +86,7 @@
 <%--                </td>--%>
                 <td colspan="2" align="center">
                     <button type="submit" >Save</button>
-                    <button  type="button" onclick="location.href = 'restaurant?action=restaurant'">Back to list of deal</button>
+                    <button  type="button" onclick="location.href = 'restaurantHome?action=restaurant'">Back to list of deal</button>
                 </td>
             </tr>
         </table>

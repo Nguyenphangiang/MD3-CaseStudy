@@ -16,7 +16,7 @@
     <table border="1" cellpadding="5">
         <caption>
             <h2>List of Restaurant</h2> <br>
-            <h3><button  type="button" onclick="location.href = '/restaurant?action=createRestaurant'">Create new restaurant</button></h3>
+            <h3><button  type="button" onclick="location.href = '/restaurantHome?action=createRestaurant'">Create new restaurant</button></h3>
         </caption>
 
         <tr>
@@ -36,15 +36,15 @@
                 <td><c:out value="${r.getOpenTime()}"/></td>
                 <td><c:out value="${r.getCloseTime()}"/></td>
                 <td>
-                    <a href="/restaurant?action=editRestaurant&id=${r.id}">Edit</a>
-                    <a href="/restaurant?action=deleteRestaurant&id=${r.id}">Delete</a>
+                    <a href="/restaurantHome?action=editRestaurant&id=${r.id}">Edit</a>
+                    <a href="/restaurantHome?action=deleteRestaurant&id=${r.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
 
     </table>
     <br>
-    <button  type="button" onclick="location.href = 'restaurant?action=restaurant'">Back to list of deal</button>
+    <button  type="button" onclick="location.href = 'restaurantHome?action=restaurant'">Back to list of deal</button>
 </div>
 </body>
 </html>

@@ -73,11 +73,11 @@ create table mon_an_tag(
     the_id int,
     mon_an_id int,
     PRIMARY KEY (the_id,mon_an_id),
-    foreign key (the_id) references the(id),
-    foreign key (mon_an_id)references mon_an(id)
+    foreign key (the_id) references the(id) on delete cascade ,
+    foreign key (mon_an_id)references mon_an(id) on delete  cascade
 );
 
 
-
+delete from mon_an where id = ?;
 
 

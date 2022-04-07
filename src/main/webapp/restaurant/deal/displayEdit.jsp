@@ -16,8 +16,8 @@
     <h3><c:if test='${requestScope["message"] != null}'>
         <span class="message">${requestScope["message"]}</span>
     </c:if></h3>
-    <button  type="button" onclick="location.href = 'restaurant?action=restaurant'">Back to list of deal</button>
-    <button  type="button" onclick="location.href = 'restaurant?action=listRestaurant'">Back to list of restaurant</button>
+    <button  type="button" onclick="location.href = 'restaurantHome?action=restaurant'">Back to list of deal</button>
+    <button  type="button" onclick="location.href = 'restaurantHome?action=listRestaurant'">Back to list of restaurant</button>
 </div>
 </body>
 </html>
