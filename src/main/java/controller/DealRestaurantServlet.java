@@ -112,8 +112,6 @@ public class DealRestaurantServlet extends HttpServlet {
         requestDispatcher.forward(request, response);
     }
 
-
-
     private void listDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                         request.setAttribute("deal", dealDAO.findAll());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("restaurant/deal/listDeal.jsp");
@@ -192,7 +190,6 @@ public class DealRestaurantServlet extends HttpServlet {
         dispatcher.forward(request, response);
 
     }
-
 
     private void insertDeal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
