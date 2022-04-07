@@ -17,9 +17,7 @@ create table ctv(
                     id int primary key auto_increment,
                     name nvarchar(50),
                     email nvarchar(50),
-                    password nvarchar(50),
-                    nha_hang_id int,
-                    foreign key (nha_hang_id) references nha_hang(id)
+                    password nvarchar(50)
 );
 create table ma_khuyen_mai(
                               id int primary key auto_increment,

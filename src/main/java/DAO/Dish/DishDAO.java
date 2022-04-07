@@ -15,23 +15,85 @@ import java.util.List;
 import static config.SingletonConnection.getConnection;
 
 public class DishDAO implements IDishDAO {
+    public static final String SQL_INSERT_DISH = "insert into mon_an (name, image, note, price, nha_hang_id)values (?,?,?,?,?)";
+    public static final String SQL_INSERT_DISH_TAG = "insert into mon_an_tag(the_id, mon_an_id) values (?,?);";
+    public static final String SQL_UPDATE_TAG = "update the set luot_them = (luot_them + 1) where id = ?;";
+    public static final String SQL_SELECT_THE_BY_ID = "select t.id, t.tagName,t.luot_them,t.luot_xem from the t where id = ?;";
     ITagDAO tagDAO = new TagDAO();
+    Connection connection = SingletonConnection.getConnection();
+    ITagDAO iTagDAO = new TagDAO();
 
     @Override
-    public void save(Dish dish, int[] categories) {
+    public void save(Dish dish, int[] tags) {
+        int dish_id = 0;
+        List<Tag> listTag = new ArrayList<>();
+        try {
+            connection.setAutoCommit(false);
+            PreparedStatement statement1 = connection.prepareStatement(SQL_INSERT_DISH,Statement.RETURN_GENERATED_KEYS);
+            statement1.setString(1,dish.getDishName());
+            statement1.setString(2,dish.getDishImage());
+            statement1.setString(3,dish.getDishNote());
+            statement1.setInt(4,dish.getDishPrice());
+            statement1.setInt(5,dish.getRestaurant().getId());
+            int dishTag =  statement1.executeUpdate();
 
+            ResultSet rs  = statement1.getGeneratedKeys();
+            while (rs.next()){
+                dish_id = rs.getInt(1);
+            }
+            PreparedStatement statement2 = connection.prepareStatement(SQL_INSERT_DISH_TAG);
+            for (int i = 1; i <= tags.length ; i++) {
+                PreparedStatement statement4 = connection.prepareStatement(SQL_SELECT_THE_BY_ID);
+                statement4.setInt(1,tags[i-1]);
+                ResultSet rs1 = statement4.executeQuery();
+                String tagName = "";
+                int addNumber = 0;
+                int addView = 0;
+                while (rs1.next()){
+                    tagName =rs1.getString("tagName");
+                    addNumber = rs1.getInt("luot_them");
+                    addView = rs1.getInt("luot_xem");
+                }
+                int tag_id = tags[i-1];
+                Tag tag = new Tag(tag_id,tagName,addNumber,addView);
+                listTag.add(tag);
+            }
+            for (int tag_id : tags){
+                statement2.setInt(1,tag_id);
+                statement2.setInt(2,dish_id);
+                statement2.executeUpdate();
+            }
+            if (dishTag > 0){
+                for (int i = 0; i < listTag.size(); i++) {
+                    PreparedStatement statement3 = connection.prepareStatement(SQL_UPDATE_TAG);
+                    statement3.setInt(1,listTag.get(i).getId());
+                    statement3.executeUpdate();
+                }
+            }
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try{
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public List<Dish> findAllByDishId(int id) {
+        return null;
     }
 
     @Override
     public List<Dish> findAll() {
         List<Dish> dishes = new ArrayList<>();
-        Connection connection = SingletonConnection.getConnection();
+        connection = SingletonConnection.getConnection();
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "select mon_an.id as id, mon_an.name as name, mon_an.image as image, mon_an.note as note, mon_an.price as price,\n" +
-                        "       mkm.id as id_discount, mkm.khuyen_mai_code as discountCode, mkm.gia_khuyen_mai as discountPrice,\n" +
                         "       nh.id as id_restaurant, nh.name as restaurant, nh.address as address, nh.phone,nh.open_time,nh.close_time \n" +
                         "from mon_an\n" +
-                        "    join ma_khuyen_mai mkm on mon_an.khuyen_mai_id = mkm.id\n" +
                         "    join nha_hang nh on nh.id = mon_an.nha_hang_id\n")
             ){
             ResultSet rs = preparedStatement.executeQuery();
@@ -41,12 +103,6 @@ public class DishDAO implements IDishDAO {
                 String image = rs.getString("image");
                 String note = rs.getString("note");
                 int price = rs.getInt("price");
-
-                int id_discount = rs.getInt("id_discount");
-                String discountCode = rs.getString("discountCode");
-                int discountPrice = rs.getInt("discountPrice");
-                DiscountCode dc = new DiscountCode(id_discount, discountCode, discountPrice);
-
                 List<Tag> tags = tagDAO.findAllByDishId(id);
 
                 int id_restaurant = rs.getInt("id_restaurant");
@@ -56,7 +112,7 @@ public class DishDAO implements IDishDAO {
                 Time openTime = rs.getTime("open_time");
                 Time closeTime = rs.getTime("close_time");
                 Restaurant restaurant = new Restaurant(id_restaurant, restaurantName, restaurantAddress, restaurantPhone, openTime, closeTime);
-                Dish dish = new Dish(id, name, image, note, price, dc, tags, restaurant);
+                Dish dish = new Dish(id, name, image, note, price, tags, restaurant);
                 dishes.add(dish);
             }
             } catch (SQLException e) {
@@ -117,4 +173,6 @@ public class DishDAO implements IDishDAO {
     public boolean delete(int id) {
         return false;
     }
+
+
 }

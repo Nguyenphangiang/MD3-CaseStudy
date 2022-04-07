@@ -13,33 +13,35 @@
 </head>
 <body>
 <h1>Danh sach mon an</h1>
+<a href="/restaurant?action=create">Add New Dish</a>
 <table border="1px solid">
     <tr>
         <th>#</th>
         <th>Name</th>
-        <th>Image</th>
         <th>Note</th>
         <th>Price</th>
-<%--        <th>Discount Price</th>--%>
         <th>Restaurant Name</th>
         <th>Danh mục Tag</th>
+        <th>Image</th>
 
     </tr>
     <c:forEach items="${dishes}" var="d">
         <tr>
             <td>${d.getId()}</td>
             <td>${d.getDishName()}</td>
-            <td>${d.getDishImage()}</td>
             <td>${d.getDishNote()}</td>
             <td>${d.getDishPrice()}</td>
-            <td>${d.restaurant.getRestaurantName()}</td>
+            <td>${d.getRestaurant().getRestaurantName()}</td>
             <td>
-                <c:forEach items="${d.tags}" var="tag">
-                    <span>${tag.name}</span> &nbsp;
+                <c:forEach items="${d.getTag()}" var="tag">
+                    <span>${tag.getTagName()}</span> &nbsp;
                 </c:forEach>
             </td>
+            <td><img src="${d.dishImage}" alt="image" width="150" height="150"></td>
+
         </tr>
     </c:forEach>
+
 </table>
 </body>
 </html>

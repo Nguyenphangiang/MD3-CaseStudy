@@ -17,6 +17,10 @@ public class DiscountCodeDAO implements IDiscountCodeDAO {
     }
 
 
+    @Override
+    public List<DiscountCode> findAllByDishId(int id) {
+        return null;
+    }
 
     @Override
     public DiscountCode findById(int id) {

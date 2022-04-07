@@ -2,17 +2,43 @@ package DAO.Restaurant;
 
 
 
+import config.SingletonConnection;
 import model.Restaurant;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import static config.SingletonConnection.getConnection;
 
 public class RestaurantDAO implements IRestaurantDAO {
+    public static final String SQL_SELECT_RESTAURANT = "select * from nha_hang;";
+    private Connection connection = SingletonConnection.getConnection();
+    @Override
+    public List<Restaurant> findAllByDishId(int id) {
+        return null;
+    }
+
     @Override
     public List<Restaurant> findAll() {
-        return null;
+        List<Restaurant> restaurantList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_SELECT_RESTAURANT);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+                String phone = rs.getString("phone");
+                Time openTime = rs.getTime("open_time");
+                Time closeTime = rs.getTime("close_time");
+                Restaurant newRestaurant = new Restaurant(id,name,address,phone,openTime,closeTime);
+                restaurantList.add(newRestaurant);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return restaurantList;
     }
 
 
