@@ -5,7 +5,6 @@ import model.Deal;
 import model.Restaurant;
 
 import java.sql.*;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,5 +149,10 @@ public class DealDAO implements IDealDAO{
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Deal> findAllByDishId(int id) {
+        return null;
     }
 }

@@ -29,7 +29,7 @@
             <tr>
                 <th>Image:</th>
                 <td>
-                    <input type="text" name="image" size="45"/>
+                    <input type="text" name="image" />
                 </td>
             </tr>
             <tr>
@@ -63,12 +63,12 @@
             <tr>
                 <td colspan="2" align="center">
                     <button type="submit" >Create</button>
-                    <button  type="button" onclick="location.href = 'restaurant?action=restaurant'">Back to list of deal</button>
+                    <button  type="button" onclick="location.href = 'restaurantHome?action=restaurant'">Back to list of deal</button>
                 </td>
             </tr>
         </table>
     </form>
-    <p>Nếu không có nhà hàng bạn muốn chọn trong danh sách bạn có thể <a href="/restaurant?action=createRestaurant">thêm nhà hàng mới</a></p>
+    <p>Nếu không có nhà hàng bạn muốn chọn trong danh sách bạn có thể <a href="/restaurantHome?action=createRestaurant">thêm nhà hàng mới</a></p>
 </div>
 
 </body>

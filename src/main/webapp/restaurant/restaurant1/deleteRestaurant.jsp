@@ -38,7 +38,7 @@
                 <td>${restaurant.getCloseTime()}</td>
             </tr>
             <tr>
-                <td><button  type="button" onclick="location.href = 'restaurant?action=listRestaurant'">Back to list of restaurant</button></td>
+                <td><button  type="button" onclick="location.href = 'restaurantHome?action=listRestaurant'">Back to list of restaurant</button></td>
                 <td><input type="submit" value="delete"></td>
             </tr>
         </table>

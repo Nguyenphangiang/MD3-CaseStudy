@@ -11,6 +11,14 @@ public class Dish {
     private List<Tag> tag;
     private Restaurant restaurant;
 
+    public Dish(String dishName, String dishImage, String dishNote, int dishPrice, Restaurant restaurant) {
+        this.dishName = dishName;
+        this.dishImage = dishImage;
+        this.dishNote = dishNote;
+        this.dishPrice = dishPrice;
+        this.restaurant = restaurant;
+    }
+
     public Dish(int id, String dishName, String dishImage, String dishNote, int dishPrice, Restaurant restaurant) {
         this.id = id;
         this.dishName = dishName;

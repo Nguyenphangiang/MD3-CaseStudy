@@ -55,8 +55,8 @@
             <tr>
                 <td colspan="2" align="center">
                     <button type="submit" >Create</button>
-                    <button  type="button" onclick="location.href = 'restaurant?action=restaurant'">Back to list of deal</button>
-                    <button  type="button" onclick="location.href = '/restaurant?action=listRestaurant'">Back to list of restaurant</button>
+                    <button  type="button" onclick="location.href = 'restaurantHome?action=restaurant'">Back to list of deal</button>
+                    <button  type="button" onclick="location.href = '/restaurantHome?action=listRestaurant'">Back to list of restaurant</button>
                 </td>
             </tr>
         </table>
