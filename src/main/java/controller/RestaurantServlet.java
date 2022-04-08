@@ -22,6 +22,8 @@ import java.util.List;
 
 @WebServlet(name = "RestaurantServlet", urlPatterns = "/restaurant")
 public class RestaurantServlet extends HttpServlet {
+    public static final int DEFAULT_VIEW = 0;
+    public static final int DEFAULT_ADD = 0;
     private IDishDAO dishDAO = new DishDAO();
     private IDiscountCodeDAO discountCodeDAO = new DiscountCodeDAO();
     private ITagDAO tagDAO = new TagDAO();
@@ -42,11 +44,15 @@ public class RestaurantServlet extends HttpServlet {
             case "deleteDish":
                 showFormDeleteDish(request,response);
                 break;
+            case "createTag":
+                showFormCreatTag(request,response);
+                break;
             default:
                 showAllDish(request, response);
                 break;
         }
     }
+
 
 
 
@@ -65,6 +71,10 @@ public class RestaurantServlet extends HttpServlet {
                 break;
             case "deleteDish":
                 deleteDish(request,response);
+                break;
+            case "createTag":
+                addNewTag(request,response);
+                break;
             default:
         }
     }
@@ -73,9 +83,26 @@ public class RestaurantServlet extends HttpServlet {
 
 
     private void showAllDish(HttpServletRequest request, HttpServletResponse response) {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("dish/listDish.jsp");
-        List<Dish> dishes = dishDAO.findAll();
+        List<Dish> dishes1 = dishDAO.findAll();
+        int page;
+        int numPerPage = 3;
+        int size = dishes1.size();
+        int numPage = (size%numPerPage == 0? size/numPerPage : (size/numPerPage) + 1);
+        String xpage = request.getParameter("page");
+        if (xpage == null){
+            page = 1;
+        } else {
+            page = Integer.parseInt(xpage);
+        }
+        int start, end;
+        start = (page-1)*numPerPage;
+        end = Math.min(page*numPerPage, size);
+        List<Dish> dishes = dishDAO.getListDishByPage(dishes1, start, end);
+
+        request.setAttribute("page", page);
+        request.setAttribute("numPage", numPage);
         request.setAttribute("dishes", dishes);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("dish/listDish.jsp");
         try {
             dispatcher.forward(request, response);
         } catch (ServletException e) {
@@ -83,6 +110,16 @@ public class RestaurantServlet extends HttpServlet {
         } catch (IOException e) {
             e.printStackTrace();
         }
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("dish/listDish.jsp");
+//        List<Dish> dishes = dishDAO.findAll();
+//        request.setAttribute("dishes", dishes);
+//        try {
+//            dispatcher.forward(request, response);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
     private void showFormEditDish(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -114,6 +151,16 @@ public class RestaurantServlet extends HttpServlet {
         request.setAttribute("tagList",tagDAO.findAll());
         request.setAttribute("restaurantList",restaurantDAO.findAll());
         dispatcher.forward(request,response);
+    }
+    private void showFormCreatTag(HttpServletRequest request, HttpServletResponse response) {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("tag/createTag.jsp");
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addNewDish(HttpServletRequest request, HttpServletResponse response) {
@@ -154,6 +201,11 @@ public class RestaurantServlet extends HttpServlet {
     private void deleteDish(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id")) ;
         dishDAO.delete(id);
+    }
+    private void addNewTag(HttpServletRequest request, HttpServletResponse response) {
+        String tagName = request.getParameter("tagName");
+        Tag newTag = new Tag(tagName, DEFAULT_ADD, DEFAULT_VIEW);
+        tagDAO.save(newTag);
     }
 }
 

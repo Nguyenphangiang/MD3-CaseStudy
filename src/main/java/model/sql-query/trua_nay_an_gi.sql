@@ -77,7 +77,13 @@ create table mon_an_tag(
     foreign key (mon_an_id)references mon_an(id) on delete  cascade
 );
 
+create table gio_hang(
+    id int primary key auto_increment,
+    mon_an_id int,
+    so_luong int,
+    foreign key (mon_an_id) references mon_an(id)
+);
 
-delete from mon_an where id = ?;
+select SUM(gh.so_luong * ma.price) from gio_hang gh join mon_an ma on gh.mon_an_id = ma.id
 
 
