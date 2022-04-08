@@ -56,7 +56,8 @@
         </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input type="submit" value="Save"/>
+                    <button type="submit">Create</button>
+                    <button type="button" onclick="location.href='/restaurantCustomer'">Back to home</button>
                 </td>
             </tr>
         </table>

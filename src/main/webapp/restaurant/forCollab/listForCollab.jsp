@@ -50,7 +50,7 @@
     <table border="1" cellpadding="5">
         <caption>
             <h2>List of Deal</h2> <br>
-            <button  type="button" onclick="location.href = '/restaurantHome?action=create'">Create new deal</button>
+            <button  type="submit" onclick="location.href = '/restaurantHome?action=create'">Create new deal</button>
             <button  type="button" onclick="location.href = '/restaurantHome?action=listRestaurant'">List of restaurant</button>
             <button  type="button" onclick="location.href = '/restaurantHome?action=createRestaurant'">Create new restaurant</button>
         </caption>

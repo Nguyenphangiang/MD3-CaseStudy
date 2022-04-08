@@ -8,9 +8,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Restaurant</title>
   </head>
   <body>
-  <img src="https://images.japancentre.com/images/pics/2143/original/original.jpg?1548744035" alt="">
+  <h1 align="center">Welcome to GADC</h1>
+  <div align="center">
+    <button type="button" onclick="location.href='/restaurantCustomer'">Go to Home Page</button>
+  </div>
   </body>
 </html>

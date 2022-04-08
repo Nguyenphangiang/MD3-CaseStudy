@@ -33,6 +33,10 @@
 <body>
 <h1>Danh sach mon an</h1>
 <h2><a href="/restaurantCustomer?action=cart">Your Cart</a></h2>
+<div align="right">
+    <button type="button" onclick="location.href='/LoginCollab'">Login</button>
+</div>
+
 <div class="pagination">
     <c:forEach begin="${1}" end="${requestScope.numPage}" var="p">
         <a class="${p==page?"active":""}" href="/restaurantCustomer?page=${p}">${p}</a>

@@ -10,6 +10,7 @@ import DAO.restaurant.IRestaurantDAO;
 import DAO.restaurant.RestaurantDAO;
 import model.Dish;
 import model.Restaurant;
+import model.Tag;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

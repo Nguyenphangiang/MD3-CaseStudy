@@ -84,6 +84,6 @@ create table gio_hang(
     foreign key (mon_an_id) references mon_an(id)
 );
 
-select SUM(gh.so_luong * ma.price) from gio_hang gh join mon_an ma on gh.mon_an_id = ma.id
-
+select SUM(gh.so_luong * ma.price) from gio_hang gh join mon_an ma on gh.mon_an_id = ma.id;
+insert into admin ( id,account, password) values (1,'admin','123');
 

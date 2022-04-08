@@ -12,10 +12,7 @@ import static config.SingletonConnection.getConnection;
 
 public class AdminDAO implements IAdminDAO {
 
-    @Override
-    public List<Admin> findAllByDishId(int id) {
-        return null;
-    }
+
 
     @Override
     public List<Admin> findAll() {

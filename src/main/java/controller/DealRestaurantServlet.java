@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.sql.Time;
 import java.text.ParseException;
 
-@WebServlet(name = "DealRestaurantServlet", urlPatterns = "/restaurantHome")
+@WebServlet(name = "DealRestaurant", urlPatterns = "/restaurantHome")
 public class DealRestaurantServlet extends HttpServlet {
     private IDealDAO dealDAO = new DealDAO();
     private IRestaurantDAO restaurantDAO = new RestaurantDAO();

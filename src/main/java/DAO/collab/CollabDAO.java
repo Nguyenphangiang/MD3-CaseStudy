@@ -139,10 +139,6 @@ public class CollabDAO implements ICollabDAO{
         return false;
     }
 
-    @Override
-    public List<Collab> findAllByDishId(int id) {
-        return null;
-    }
 
     public List<Collab> selectAllCollab(){
         List<Collab> collabs = new ArrayList<>();
