@@ -14,6 +14,12 @@ public class Tag {
         this.tagName = tagName;
     }
 
+    public Tag(String tagName, int viewNumber, int addNumber) {
+        this.tagName = tagName;
+        this.viewNumber = viewNumber;
+        this.addNumber = addNumber;
+    }
+
     public List<Dish> getDishList() {
         return dishList;
     }

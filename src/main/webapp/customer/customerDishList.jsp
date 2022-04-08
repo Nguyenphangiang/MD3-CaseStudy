@@ -32,13 +32,10 @@
 </style>
 <body>
 <h1>Danh sach mon an</h1>
-<a href="/restaurant?action=create">Add New Dish</a>
-<a href="/restaurantHome?action=creat">Go To Deal Menu</a>
-<a href="/restaurant?action=createTag">Create New Tag</a>
-<c:set var="page" value="${requestScope.page}"/>
+<h2><a href="/restaurantCustomer?action=cart">Your Cart</a></h2>
 <div class="pagination">
     <c:forEach begin="${1}" end="${requestScope.numPage}" var="p">
-        <a class="${p==page?"active":""}" href="/restaurant?page=${p}">${p}</a>
+        <a class="${p==page?"active":""}" href="/restaurantCustomer?page=${p}">${p}</a>
     </c:forEach>
 </div>
 <table border="1px solid">
@@ -64,10 +61,8 @@
             </td>
             <td><img src="${d.dishImage}" alt="image" width="150" height="150"></td>
             <td>
-                <a href="/restaurant?action=editDish&id=${d.id}">Edit Dish</a>
-                <a href="/restaurant?action=deleteDish&id=${d.id}">Delete</a>
+                <a href="/restaurantCustomer?action=buy&id=${d.getId()}">Buy</a>
             </td>
-
         </tr>
     </c:forEach>
 </table>

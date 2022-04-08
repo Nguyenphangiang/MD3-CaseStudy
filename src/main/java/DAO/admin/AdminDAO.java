@@ -57,4 +57,9 @@ public class AdminDAO implements IAdminDAO {
     public boolean delete(int id) {
         return false;
     }
+
+    @Override
+    public List<Admin> findAllByDishId(int id) {
+        return null;
+    }
 }

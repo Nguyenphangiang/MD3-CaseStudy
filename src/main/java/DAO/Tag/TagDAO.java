@@ -13,6 +13,7 @@ import java.util.List;
 public class TagDAO implements ITagDAO{
 
     public static final String SQL_SELECT_TAG = "select * from the;";
+    public static final String SQL_INSERT_INTO_TAG = "insert into the(tagName, luot_them, luot_xem) values (?,?,?);)";
     private Connection connection = SingletonConnection.getConnection();
     public static final String SQL_SELECT_TAG_BY_ID = "select t.tagName,t.luot_them,t.luot_xem from the t where id = ?;";
     public static final String SQL_SELECT_BY_NAME = "select t.tagName,t.luot_them,t.luot_xem from the t where tagName = ?;";
@@ -50,6 +51,15 @@ public class TagDAO implements ITagDAO{
 
     @Override
     public boolean save(Tag tag) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_INTO_TAG);
+            preparedStatement.setString(1,tag.getTagName());
+            preparedStatement.setInt(2,tag.getAddNumber());
+            preparedStatement.setInt(3,tag.getViewNumber());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 

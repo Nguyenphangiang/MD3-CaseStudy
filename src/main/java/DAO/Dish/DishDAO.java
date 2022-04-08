@@ -14,6 +14,15 @@ import java.util.List;
 import static config.SingletonConnection.getConnection;
 
 public class DishDAO implements IDishDAO {
+    @Override
+    public List<Dish> getListDishByPage(List<Dish> dishes, int start, int end) {
+        List<Dish> dishList = new ArrayList<>();
+        for (int i = start; i < end; i++) {
+            dishList.add(dishes.get(i));
+        }
+        return dishList;
+    }
+
     public static final String SQL_INSERT_DISH = "insert into mon_an (name, image, note, price, nha_hang_id)values (?,?,?,?,?)";
     public static final String SQL_INSERT_DISH_TAG = "insert into mon_an_tag(the_id, mon_an_id) values (?,?);";
     public static final String SQL_UPDATE_TAG = "update the set luot_them = (luot_them + 1) where id = ?;";
